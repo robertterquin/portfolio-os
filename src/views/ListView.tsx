@@ -12,8 +12,8 @@ import './ListView.css';
 
 const requirementOf = new Map(sections.map((s) => [s.id as AppId, s.requirement]));
 
-function scrollToSection(id: AppId) {
-  const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function scrollToSection(id: AppId, { animate = true } = {}) {
+  const smooth = animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const el = document.getElementById(`list-${id}`);
   // Focus first: moving focus during a smooth scroll can cancel the scroll.
   el?.focus({ preventScroll: true });
@@ -32,7 +32,8 @@ export function ListView() {
   // Open on the section named in the link, and follow links like #iot.
   useEffect(() => {
     const fromLink = readHashApp();
-    if (fromLink) scrollToSection(fromLink);
+    // Landing on a link jumps straight there; later jumps animate.
+    if (fromLink) scrollToSection(fromLink, { animate: false });
     const onHashChange = () => {
       const id = readHashApp();
       if (id) goTo(id);

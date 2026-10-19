@@ -36,12 +36,23 @@ All portfolio content lives in `src/content/`, one file per section:
 | `competitions.ts`   | 7. Competitions and awards           |
 | `leadership.ts`     | 8. Officership and leadership        |
 
-Put certificate files in `public/certificates/` and project images in `public/projects/`, then link them from an entry's `evidence` list, for example `{ label: 'Certificate', kind: 'certificate', url: '/certificates/its-databases.pdf' }`.
+Skills for the Tech Stack folder live in `profile.ts` under `skills`.
+
+Put certificate files in `public/certificates/` and project images in `public/projects/`, then link them from an entry's `evidence` list, for example `{ label: 'Certificate', kind: 'certificate', url: '/certificates/it-specialist-databases.webp', alt: '…' }`. Photos and certificate images need `alt` text describing what they show.
 
 Every entry can carry a `missing` list naming details that still have to be confirmed. The site shows those entries with a "details coming soon" tag. Remove an item from `missing` once the real detail is filled in.
+
+## Ways to view it
+
+- **Desktop** (768 px and wider): folders open as draggable windows. Esc closes the active window.
+- **Phone**: a home screen of apps; each opens full screen.
+- **List view**: every section on one scrolling page. Toggle it from the menu bar, or share a link with `?view=list`.
+- **Links to a section**: add the section id, e.g. `#capstone`, `#certifications`, `#stack`, `#terminal`.
+- **Terminal**: type `help` for the commands.
 
 ## Project docs
 
 - `docs/content-inventory.md`: what was gathered, and from where
+- `docs/qa-report.md`: the latest QA results
 - `docs/moodboard.html`: the four design directions that were compared
 - Development plan: https://claude.ai/code/artifact/aa4fee0a-2b2b-484a-ac71-08b1df4593d9

@@ -28,6 +28,7 @@ export const competitions: Competition[] = [
     submission:
       'Capture-the-Flag cybersecurity challenge covering network security, web security, and cryptography. Theme: "Cyber Guardians: Empowering Today\'s Defenders, Securing Tomorrow\'s Digital Nation."',
     teamName: 'Brute4z',
+    missing: ['My role on team Brute4z'],
     evidence: [
       {
         label: 'Certificate',

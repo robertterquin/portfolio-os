@@ -1,6 +1,6 @@
 import { competitions } from '../content';
 import { formatDate } from '../lib/date';
-import { PendingTag } from '../os';
+import { MyRolePanel, PendingTag } from '../os';
 import { AppIntro, EmptyState, EvidenceActions, type ViewCertificate } from './parts';
 import { competitionItem } from './viewerItems';
 import './listApps.css';
@@ -43,6 +43,7 @@ export function TrophiesApp({ onViewCertificate }: { onViewCertificate: ViewCert
                     <dd>{c.submission}</dd>
                   </div>
                 </dl>
+                {c.myRole && <MyRolePanel>{c.myRole}</MyRolePanel>}
                 <PendingTag missing={c.missing} />
                 <EvidenceActions
                   evidence={c.evidence}

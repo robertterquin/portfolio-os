@@ -158,6 +158,8 @@ export type Competition = Pending & {
   teamName?: string;
   /** Only filled once each teammate has agreed to be named. */
   teammates?: string[];
+  /** Robert's part in a team entry. */
+  myRole?: string;
   evidence: Evidence[];
 };
 
