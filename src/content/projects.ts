@@ -2,7 +2,7 @@ import type { CourseProject } from './types';
 
 // Third-year course projects. Found as course-named repos on GitHub; titles,
 // descriptions, and contributions still need Robert's input.
-const needsDetails = ['Project title', 'What it does', 'Your specific contribution', 'Screenshots'];
+const needsDetails = ['Project title', 'What it does', 'My specific contribution', 'Screenshots'];
 
 export const projects: CourseProject[] = [
   {

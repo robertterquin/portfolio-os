@@ -16,5 +16,5 @@ export const profile: Profile = {
     resume: '/resume.pdf',
     professionalSite: 'https://robertterquin.com',
   },
-  missing: ['Year level and section to display'],
+  missing: ['Year level and section'],
 };

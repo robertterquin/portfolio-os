@@ -14,7 +14,7 @@ export const iotProject: IoTProject = {
     'Description',
     'Objectives',
     'Technologies and components',
-    'Your role and contribution',
+    'My role and contribution',
     'Photos, diagrams, or screenshots',
     'Output or result',
   ],

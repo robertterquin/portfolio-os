@@ -25,7 +25,7 @@ export const capstone: Capstone = {
     'Objectives',
     'Full tech stack',
     'Team members and their roles',
-    'Your role',
+    'My role',
     'Current status and progress',
     'Screenshots or diagrams',
   ],

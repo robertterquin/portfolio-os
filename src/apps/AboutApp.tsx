@@ -26,9 +26,7 @@ export function AboutApp({ onOpenApp }: AboutAppProps) {
         </div>
         <div>
           <dt>Year level</dt>
-          <dd>
-            {profile.yearLevel ?? <PendingTag missing={['Year level and section to display']} />}
-          </dd>
+          <dd>{profile.yearLevel ?? <PendingTag missing={profile.missing} />}</dd>
         </div>
         <div>
           <dt>Email</dt>

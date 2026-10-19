@@ -9,7 +9,9 @@ import './App.css';
 
 const LIST_VIEW_KEY = 'student-os:list-view';
 
+/** A link with ?view=list opens List view, e.g. for a grader. Otherwise the last choice wins. */
 function readListViewPref() {
+  if (new URLSearchParams(location.search).get('view') === 'list') return true;
   try {
     return localStorage.getItem(LIST_VIEW_KEY) === 'on';
   } catch {
@@ -29,6 +31,11 @@ export default function App() {
   const toggleListView = () => {
     const next = !listView;
     setListView(next);
+    // Keep the address in step so it can be shared as-is.
+    const url = new URL(location.href);
+    if (next) url.searchParams.set('view', 'list');
+    else url.searchParams.delete('view');
+    history.replaceState(null, '', url);
     try {
       localStorage.setItem(LIST_VIEW_KEY, next ? 'on' : 'off');
     } catch {
