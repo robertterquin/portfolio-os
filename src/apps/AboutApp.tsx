@@ -1,5 +1,6 @@
 import { profile, sections } from '../content';
 import { Button, LinkButton, PendingTag } from '../os';
+import { Chips } from './parts';
 import type { AppId } from './registry';
 import './AboutApp.css';
 
@@ -33,6 +34,18 @@ export function AboutApp({ onOpenApp }: AboutAppProps) {
           <dd>{profile.email}</dd>
         </div>
       </dl>
+
+      <section className="about__skills" aria-labelledby="about-skills-title">
+        <p className="about__index-title" id="about-skills-title">
+          Technical skills
+        </p>
+        {profile.skills.map((group) => (
+          <div key={group.category} className="about__skill">
+            <p className="about__skill-name">{group.category}</p>
+            <Chips items={group.tools} />
+          </div>
+        ))}
+      </section>
 
       <nav className="about__index" aria-label="Portfolio sections">
         <p className="about__index-title">What's inside</p>

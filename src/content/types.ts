@@ -32,6 +32,7 @@ export type Profile = Pending & {
   years: string;
   yearLevel?: string;
   intro: string;
+  location: string;
   email: string;
   phone: string;
   links: {
@@ -40,6 +41,13 @@ export type Profile = Pending & {
     resume: string;
     professionalSite: string;
   };
+  skills: SkillGroup[];
+};
+
+export type SkillGroup = {
+  category: string;
+  focus: string;
+  tools: string[];
 };
 
 export type Certification = Pending & {
@@ -102,9 +110,14 @@ export type Capstone = Pending & {
 export type CourseProject = Pending & {
   id: string;
   title: string;
+  /** Short category label, e.g. "Healthcare mobile app". */
+  tag?: string;
   courseCode?: string;
   courseName?: string;
   summary: string;
+  /** A longer technical description. */
+  details?: string;
+  highlights?: string[];
   tech: string[];
   /** Robert's specific contribution. Required for group work. */
   contribution: string;

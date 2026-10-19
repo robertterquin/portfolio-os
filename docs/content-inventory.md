@@ -1,55 +1,70 @@
 # Content inventory: midterm portfolio
 
-Gathered on 2026-10-19, read-only, from robertterquin.com, the resume PDF linked there, public GitHub repos (github.com/robertterquin), and the SDCA HackForGov article. Nothing on those sites was changed.
+Updated 2026-10-19. Main source: robertterquin.com, read only and never changed. Dates and placements come from the certificate images published on that site. The HackForGov organizer and team name come from the SDCA article the site links to.
 
-Status key: ✅ have it · ⚠️ partial, needs detail · ❌ missing, need from Robert
+Status key: ✅ done · ⚠️ partial · ❌ missing, need from Robert
 
 ## Profile ✅
-- Name: Robert Terquin C. Laqui (site shows "Robert Terquin Laqui")
-- Program: BS Information Technology, St. Dominic College of Asia (SDCA), 2023–2027
-- Intro: full-stack developer, cross-platform mobile and web (Flutter, React, Node.js, cloud backends)
-- Freelance mobile and web developer, 2024–present
-- Contact: terquinlaqui@gmail.com · +63 926 029 4838
-- Links: GitHub github.com/robertterquin · LinkedIn linkedin.com/in/robertterquin/ · Resume robertterquin.com/Robert_Terquin_Laqui_Resume.pdf
-- GitHub: 1,017 contributions in the last year (as of 2026-10-19)
-- ❌ Year/section to show (dates suggest 4th year in A.Y. 2026–2027; confirm)
 
-## 1. Certifications ⚠️ (need exact dates + certificate files/links)
-| Title | Issuer | Year on site |
-|---|---|---|
-| IT Specialist in Cybersecurity | Certiport | 2026 |
-| IT Specialist in HTML and CSS | Certiport | 2026 |
-| IT Specialist in Databases | Certiport | 2025 |
-| Oracle Java Foundations (Certified Foundations Associate) | Oracle Academy | 2024 |
+- Name: Robert Terquin C. Laqui
+- Program: BS Information Technology, St. Dominic College of Asia, 2023–2027
+- Bio (from the site): software engineer specializing in cross-platform mobile and web systems with Flutter, React, Node.js, and cloud backends
+- Location: Philippines
+- Contact and links: terquinlaqui@gmail.com, +63 926 029 4838, GitHub, LinkedIn, resume PDF
+- Technical skills: the site's 4 Technical Stack groups, shown in About Me
+- ❌ Year level and section to display
 
-## 2. Course completions ❌
-Nothing found. Need: course title, platform (Cisco NetAcad, Oracle Academy, AWS Academy, Microsoft, Coursera, Google, Udemy…), completion date, certificate link.
+## 1. Certifications ✅
+
+| Title (as on the site)         | Issuer    | Date awarded (from certificate) | Evidence                                 |
+| ------------------------------ | --------- | ------------------------------- | ---------------------------------------- |
+| IT Specialist in Cybersecurity | Certiport | 2026-06-03                      | Certificate image + verify.certiport.com |
+| HTML and CSS Specialist        | Certiport | 2026-02-04                      | Certificate image + verify.certiport.com |
+| IT Specialist in Databases     | Certiport | 2025-05-07                      | Certificate image + verify.certiport.com |
+
+## 2. Course completions ⚠️
+
+| Course           | Provider       | Completed  | Evidence                         |
+| ---------------- | -------------- | ---------- | -------------------------------- |
+| Java Foundations | Oracle Academy | 2024-12-29 | Award of Course Completion image |
+
+The site lists this one under certifications as "Oracle Java Foundations, Oracle Certified Foundations Associate". The certificate itself is an Oracle Academy Award of Course Completion, so the new portfolio files it under course completions.
+
+❌ Any other courses (Cisco, AWS, Coursera, Udemy, etc.)
 
 ## 3. IoT project ❌
-Nothing found on the site or GitHub. Need: title, description, objectives, components, your role, photos/diagrams, result.
 
-## 4. Capstone project ❌ (possible lead)
-Possible match: **BarangayHub**, a Barangay Management Information System for Barangay Daine II (github.com/robertterquin/BarangayHub, live at barangay-hub-gold.vercel.app). Admin and resident portals, document request workflow, complaints/blotter, announcements, resident records with CSV import.
-Need to confirm: is this the capstone? Plus title, objectives, stack, team members, your role, status, screenshots.
+Not on the site. Need: title, description, objectives, components, role, photos/diagram, result.
 
-## 5. Third-year course projects ⚠️ (course repos found, need descriptions + your part)
-- SDCA-IT308-Next-App: Next.js / TypeScript (IT 308), Jan 2026
-- SDCA-IT303-API: backend API, Node.js + MongoDB (IT 303), Oct 2025
-- SDCA-IT-ELEC4-Flutter: Flutter mobile app (IT Elective 4), Oct 2025
-- Other projects that could count if built for a course: OncoSense (Flutter, cancer awareness), Chainly (Flutter, bike maintenance), RideTrack (Flutter), Spendly (Flutter, finance + AI assistant), SmartEvent (Flutter), QuizApp (Java)
-- Personal projects (shown on main site): Hapag, Bakas, Hunch
+## 4. Capstone project ❌
+
+Not on the site. Need: title, description, objectives, tech, team members, role, status, screenshots.
+
+## 5. Projects ⚠️
+
+The site's 6 "Selected Work" projects, copied as written: OncoSense, Chainly, Spendly (Flutter mobile apps) and Hunch, Hapag, Bakas (React web apps). Each has its description, technical detail, highlights, stack, screenshot, and repo or live links.
+
+❌ For each one: which course it was built for, and whether it was solo or team work (with my role if team).
 
 ## 6. Other achievements ⚠️
-- Freelance work, 2024–present
+
+- Mobile & Web Developer, Freelance, 2024–present (from the site's Career & Education)
 - ❌ Scholarships, dean's list, trainings, workshops, seminars, certificates of participation
 
-## 7. Competitions and awards ⚠️ (need certificates/photos + exact dates)
-| Event | Organizer | Date | Placement | Work submitted |
-|---|---|---|---|---|
-| CALABARZON Regional HackForGov 2025 ("Cyber Guardians") | DICT CALABARZON with NCERT | Article dated 2025-10-06; event date ❌ | 2nd Runner-Up, team Brute4z (with Winmari Manzano, CJ Sacdalan, Louis Gabriel Damondamon) | Capture-the-Flag: network security, web security, cryptography. Venue: LIMA Park Hotel, Batangas. Source: stdominiccollege.edu.ph article |
-| CodeChum National Programming Competition 2025 | CodeChum | ❌ | 5th Place (per resume) | ❌ |
-| CodeChum National Programming Competition 2024 | CodeChum | ❌ | 6th Place (per resume) | ❌ |
-Note: the website lists the CodeChum entries without placements; the resume has them.
+## 7. Competitions and awards ✅
+
+| Event                                                   | Organizer                                  | Date       | Placement                   | Evidence                                       |
+| ------------------------------------------------------- | ------------------------------------------ | ---------- | --------------------------- | ---------------------------------------------- |
+| CodeChum National Programming Challenge 2025 (Season 2) | CodeChum                                   | 2025-11-13 | 5th Place, Group Stage 1    | Certificate image                              |
+| HackForGov 2025: CALABARZON (Capture-the-Flag)          | DICT CALABARZON Regional Office with NCERT | 2025-10-06 | 2nd Runner-Up, team Brute4z | Participation certificate image + SDCA article |
+| CodeChum National Programming Challenge 2024            | CodeChum                                   | 2024-10-28 | 6th Place, Group Stage 2    | Certificate image                              |
+
+Teammates' names are left out until each one agrees.
 
 ## 8. Officership and leadership ❌
-Nothing found. Need: organization, position, academic year, responsibilities, any certificates.
+
+Not on the site. Need: organization, position, academic year, responsibilities, certificates.
+
+## Removed in this update
+
+Earlier drafts had added entries found only on GitHub: course repos for IT 308, IT 303, and IT Elective 4, plus BarangayHub as a possible capstone. They were removed because they aren't on robertterquin.com.
