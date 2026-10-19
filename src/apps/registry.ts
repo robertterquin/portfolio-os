@@ -50,7 +50,7 @@ export const aboutApp: AppMeta = {
   label: 'about_me.txt',
   accent: 'yellow',
   icon: 'file',
-  width: 440,
+  width: 500,
 };
 
 export const certificatesApp: AppMeta = {

@@ -1,6 +1,6 @@
 .about__head {
   display: grid;
-  grid-template-columns: 104px minmax(0, 1fr);
+  grid-template-columns: 148px minmax(0, 1fr);
   gap: var(--space-4);
   align-items: start;
   margin-bottom: var(--space-4);
@@ -108,7 +108,7 @@
 
 @media (max-width: 420px) {
   .about__head {
-    grid-template-columns: 76px minmax(0, 1fr);
+    grid-template-columns: 108px minmax(0, 1fr);
     gap: var(--space-3);
   }
 }
