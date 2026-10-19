@@ -1,0 +1,11 @@
+.shell {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  overflow: hidden;
+}
+
+.shell > .menubar {
+  position: relative;
+  z-index: var(--z-menubar);
+}

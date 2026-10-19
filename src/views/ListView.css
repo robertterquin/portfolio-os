@@ -1,0 +1,115 @@
+.listview {
+  position: relative;
+  overflow-y: auto;
+  padding-block: var(--space-6) var(--space-7);
+  padding-left: max(var(--space-4), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--space-4), env(safe-area-inset-right, 0px));
+  scroll-padding-top: var(--space-4);
+}
+
+.listview__inner {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 720px);
+  justify-content: center;
+  align-items: start;
+  gap: var(--space-6);
+}
+
+/* Table of contents: a sticky sidebar on wide screens */
+.listview__toc {
+  position: sticky;
+  top: var(--space-4);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius);
+  background: var(--window);
+  box-shadow: var(--shadow-hard-sm);
+  font-size: var(--text-sm);
+}
+
+.listview__toc-title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+}
+
+.listview__toc ol {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding-left: 1.4em;
+}
+
+.listview__toc li::marker {
+  color: var(--ink-muted);
+}
+
+.listview__toc a {
+  text-decoration: underline;
+  text-decoration-color: var(--line-soft);
+  text-underline-offset: 3px;
+}
+
+.listview__toc a:hover {
+  text-decoration-color: currentColor;
+}
+
+.listview__sections {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* Windows here are plain cards: full height, no inner scrolling */
+.listview__window {
+  max-height: none;
+  overflow: visible;
+}
+
+.listview__window .win__bar {
+  border-radius: calc(var(--radius) - 2px) calc(var(--radius) - 2px) 0 0;
+}
+
+.listview__window .win__title {
+  font-size: var(--text-sm);
+  white-space: normal;
+}
+
+.listview__window .win__body {
+  overflow: visible;
+  padding: var(--space-5);
+}
+
+.listview__window:focus {
+  outline: none;
+}
+
+/* Narrow screens: the contents become a wrapped strip above the sections */
+@media (max-width: 960px) {
+  .listview {
+    padding-top: var(--space-4);
+  }
+
+  .listview__inner {
+    grid-template-columns: minmax(0, 720px);
+    gap: var(--space-4);
+  }
+
+  .listview__toc {
+    position: static;
+  }
+
+  .listview__toc ol {
+    columns: 2 220px;
+    display: block;
+  }
+
+  .listview__toc li {
+    margin-bottom: var(--space-1);
+  }
+}
+
+@media (max-width: 520px) {
+  .listview__window .win__body {
+    padding: var(--space-4);
+  }
+}

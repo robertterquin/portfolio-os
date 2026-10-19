@@ -9,17 +9,10 @@ import {
 } from 'react';
 import { AppContent } from '../apps/AppContent';
 import type { ViewerItem } from '../apps/parts';
-import {
-  aboutApp,
-  dockAppIds,
-  getApp,
-  isLinkableAppId,
-  sectionApps,
-  type AppId,
-} from '../apps/registry';
+import { aboutApp, dockAppIds, getApp, sectionApps, type AppId } from '../apps/registry';
 import { sections, type SectionId } from '../content';
-import { useTheme } from '../lib/theme';
-import { DesktopIcon, Dock, MenuBar, StickyNote, Window, type DockItem } from '../os';
+import { readHashApp, replaceHash } from '../lib/hash';
+import { DesktopIcon, Dock, StickyNote, Window, type DockItem } from '../os';
 import { clampPosition, useWindowManager, type Bounds } from '../os/windowManager';
 import './DesktopView.css';
 
@@ -29,11 +22,6 @@ const dockItems: DockItem[] = dockAppIds.map((id) => {
 });
 
 const pendingBySection = new Map(sections.map((s) => [s.id, s.pendingCount]));
-
-function readHashApp(): AppId | null {
-  const id = decodeURIComponent(location.hash.slice(1));
-  return isLinkableAppId(id) ? id : null;
-}
 
 /** Single click selects an icon, double click opens it. Keyboard and touch open on one press. */
 function opensOnSingleClick(event: MouseEvent) {
@@ -54,8 +42,7 @@ function initialWindows() {
 }
 
 export function DesktopView() {
-  const { theme, toggleTheme } = useTheme();
-  const deskRef = useRef<HTMLDivElement>(null);
+  const deskRef = useRef<HTMLElement>(null);
   const [bounds, setBounds] = useState<Bounds>(viewportBounds);
   const boundsRef = useRef<Bounds>(bounds);
   const getBounds = useCallback(() => boundsRef.current, []);
@@ -149,11 +136,7 @@ export function DesktopView() {
   // The Certificate Viewer can't be linked to, so the address keeps the window behind it.
   useEffect(() => {
     if (activeId === 'viewer') return;
-    const url =
-      activeId && activeId !== 'about' ? `#${activeId}` : `${location.pathname}${location.search}`;
-    if (url !== `${location.pathname}${location.search}${location.hash}`) {
-      history.replaceState(null, '', url);
-    }
+    replaceHash(activeId && activeId !== 'about' ? activeId : null);
   }, [activeId]);
 
   // Esc closes the active window.
@@ -209,94 +192,88 @@ export function DesktopView() {
   const openIds = stack.map((w) => w.id);
 
   return (
-    <div className="desktop">
-      <MenuBar theme={theme} onToggleTheme={toggleTheme} onOpenAbout={() => openApp('about')} />
-
-      <main
-        ref={deskRef}
-        className="desk"
-        aria-label="Desktop"
-        onPointerDown={(event) => {
-          if (event.target === event.currentTarget) setSelected(null);
-        }}
-      >
-        <h1 className="visually-hidden">Robert Terquin Laqui, student portfolio</h1>
-
-        <nav className="desk__icons" aria-label="Portfolio sections">
-          {sectionApps.map((app) => {
-            const pending = pendingBySection.get(app.id as SectionId) ?? 0;
-            return (
-              <DesktopIcon
-                key={app.id}
-                label={app.label}
-                kind={app.icon}
-                accent={app.accent}
-                badge={pending}
-                badgeLabel={`${pending} waiting on details`}
-                {...iconProps(app.id)}
-              />
-            );
-          })}
-          <DesktopIcon label={aboutApp.label} kind="file" {...iconProps('about')} />
-          <DesktopIcon
-            label="resume.pdf"
-            kind="file"
-            selected={false}
-            onClick={() => window.open('/resume.pdf', '_blank', 'noopener')}
-          />
-        </nav>
-
-        {stack.map((win, index) => {
-          if (win.minimized) return null;
-          const app = getApp(win.id);
+    <main
+      ref={deskRef}
+      className="desk"
+      aria-label="Desktop"
+      onPointerDown={(event) => {
+        if (event.target === event.currentTarget) setSelected(null);
+      }}
+    >
+      <nav className="desk__icons" aria-label="Portfolio sections">
+        {sectionApps.map((app) => {
+          const pending = pendingBySection.get(app.id as SectionId) ?? 0;
           return (
-            <Window
-              key={win.id}
-              ref={(el) => {
-                if (el) windowEls.current.set(win.id, el);
-                else windowEls.current.delete(win.id);
-              }}
-              title={app.windowTitle}
+            <DesktopIcon
+              key={app.id}
+              label={app.label}
+              kind={app.icon}
               accent={app.accent}
-              active={win.id === activeId}
-              onClose={() => closeApp(win.id)}
-              onMinimize={() => minimizeApp(win.id)}
-              className="desk__window"
-              style={{
-                left: win.x,
-                top: win.y,
-                width: win.width,
-                maxHeight: Math.max(220, bounds.height - win.y - 96),
-                zIndex: 10 + index,
-              }}
-              rootProps={{
-                id: `win-${win.id}`,
-                tabIndex: -1,
-                onPointerDownCapture: () => focus(win.id),
-                onFocusCapture: () => focus(win.id),
-              }}
-              titleBarProps={{ onPointerDown: startDrag(win.id) }}
-            >
-              <AppContent
-                id={win.id}
-                onOpenApp={openApp}
-                onViewCertificate={viewCertificate}
-                viewerItem={viewerItem}
-              />
-            </Window>
+              badge={pending}
+              badgeLabel={`${pending} waiting on details`}
+              {...iconProps(app.id)}
+            />
           );
         })}
+        <DesktopIcon label={aboutApp.label} kind="file" {...iconProps('about')} />
+        <DesktopIcon
+          label="resume.pdf"
+          kind="file"
+          selected={false}
+          onClick={() => window.open('/resume.pdf', '_blank', 'noopener')}
+        />
+      </nav>
 
-        {bounds.width >= 900 && (
-          <StickyNote className="desk__sticky" tilt={3}>
-            double-click a folder to open it. drag windows by their title bar!
-          </StickyNote>
-        )}
+      {stack.map((win, index) => {
+        if (win.minimized) return null;
+        const app = getApp(win.id);
+        return (
+          <Window
+            key={win.id}
+            ref={(el) => {
+              if (el) windowEls.current.set(win.id, el);
+              else windowEls.current.delete(win.id);
+            }}
+            title={app.windowTitle}
+            accent={app.accent}
+            active={win.id === activeId}
+            onClose={() => closeApp(win.id)}
+            onMinimize={() => minimizeApp(win.id)}
+            className="desk__window"
+            style={{
+              left: win.x,
+              top: win.y,
+              width: win.width,
+              maxHeight: Math.max(220, bounds.height - win.y - 96),
+              zIndex: 10 + index,
+            }}
+            rootProps={{
+              id: `win-${win.id}`,
+              tabIndex: -1,
+              onPointerDownCapture: () => focus(win.id),
+              onFocusCapture: () => focus(win.id),
+            }}
+            titleBarProps={{ onPointerDown: startDrag(win.id) }}
+          >
+            <AppContent
+              id={win.id}
+              onOpenApp={openApp}
+              onViewCertificate={viewCertificate}
+              viewerItem={viewerItem}
+            />
+          </Window>
+        );
+      })}
 
-        <div className="desk__dock">
-          <Dock items={dockItems} openIds={openIds} onOpen={(id) => openApp(id as AppId)} />
-        </div>
-      </main>
-    </div>
+      {bounds.width >= 900 && (
+        <StickyNote className="desk__sticky" tilt={3}>
+          double-click a folder to open it. drag windows by their title bar!
+        </StickyNote>
+      )}
+
+      <div className="desk__dock">
+        <Dock items={dockItems} openIds={openIds} onOpen={(id) => openApp(id as AppId)} />
+      </div>
+    </main>
   );
 }

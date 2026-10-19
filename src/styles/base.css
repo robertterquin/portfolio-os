@@ -11,7 +11,9 @@ body,
   margin: 0;
 }
 
+/* The app is one screen; its views scroll inside their own panes. */
 body {
+  overflow: hidden;
   background-color: var(--desk);
   background-image: radial-gradient(var(--desk-dot) 1.2px, transparent 1.3px);
   background-size: 14px 14px;
