@@ -47,7 +47,7 @@ const commands: Record<string, (args: string[], ctx: Context) => Result> = {
   help: () => help,
   whoami: () => [
     profile.fullName,
-    `${profile.program}, ${profile.school} (${profile.years})`,
+    `${profile.yearLevel}, ${profile.program}, ${profile.school} (${profile.years})`,
     profile.intro,
   ],
   ls: () =>

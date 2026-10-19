@@ -1,3 +1,26 @@
+.about__head {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  margin-bottom: var(--space-4);
+}
+
+/* A taped-on instant photo, in the same spirit as the desktop's sticky note. */
+.about__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  padding: 5px 5px 14px;
+  border: var(--border-width) solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: var(--shadow-hard-sm);
+  rotate: -3deg;
+}
+
 .about__hello {
   margin: 0 0 var(--space-2);
   font-family: var(--font-display);
@@ -6,7 +29,7 @@
 }
 
 .about__intro {
-  margin: 0 0 var(--space-4);
+  margin: 0;
   max-width: 52ch;
 }
 
@@ -81,4 +104,11 @@
 
 .about__index button:hover {
   text-decoration-color: currentColor;
+}
+
+@media (max-width: 420px) {
+  .about__head {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: var(--space-3);
+  }
 }

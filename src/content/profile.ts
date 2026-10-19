@@ -7,6 +7,12 @@ export const profile: Profile = {
   program: 'BS Information Technology',
   school: 'St. Dominic College of Asia',
   years: '2023–2027',
+  yearLevel: '4th year',
+  // Same portrait as the robertterquin.com hero, cropped to head and shoulders.
+  photo: {
+    url: '/portrait.jpg',
+    alt: 'Robert Terquin Laqui in a black T-shirt, seated against a concrete wall',
+  },
   intro:
     'Software engineer specializing in cross-platform mobile and web systems with Flutter, React, Node.js, and cloud backends. Focused on building clean, high-performance applications with thoughtful user experiences.',
   location: 'Philippines',
@@ -60,5 +66,4 @@ export const profile: Profile = {
       tools: ['Java', 'Python', 'C Programming', 'Cybersecurity Fundamentals', 'Git & GitHub'],
     },
   ],
-  missing: ['Year level and section'],
 };

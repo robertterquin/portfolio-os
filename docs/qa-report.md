@@ -13,7 +13,7 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 | Capstone: title, description, objectives, technologies, team, role, status         | ❌ Placeholder only                                                                         |
 | Every competition shows event, organizer, date, placement, work submitted          | ✅ Pass (3 competitions, each with certificate image)                                       |
 | Every group project names my individual contribution                               | ⚠️ Unknown: the 6 projects need "solo or team", and HackForGov (team Brute4z) needs my role |
-| No placeholder tags remain                                                         | ❌ 9 entries still tagged (list below)                                                      |
+| No placeholder tags remain                                                         | ❌ 8 entries still tagged (list below)                                                      |
 | No confidential data (student IDs, grades, client data, teammates' contacts)       | ✅ Pass                                                                                     |
 | Grammar and spelling                                                               | ✅ Proofread                                                                                |
 
@@ -21,7 +21,6 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 
 | Section         | Entry                                            | Missing                                                                           |
 | --------------- | ------------------------------------------------ | --------------------------------------------------------------------------------- |
-| Profile         | About me                                         | Year level and section                                                            |
 | 3. IoT project  | IoT project                                      | Everything: title, description, objectives, components, role, photos, result      |
 | 4. Capstone     | Capstone project                                 | Everything: title, description, objectives, tech, team, role, status, screenshots |
 | 5. Projects     | OncoSense, Chainly, Spendly, Hunch, Hapag, Bakas | Course each was built for; solo or team, and my role                              |
@@ -64,3 +63,4 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 - Removed repeated text: the "Information Technology Specialist certification" line on every Certiport entry, "Awarded to" in the Certificate Viewer, duplicate About buttons, the section index in List view's About (the sidebar already lists them), extra "coming soon" tags on IoT and Capstone, and a filler note in Achievements.
 - Fixed links to a section landing short when web fonts loaded after the jump.
 - Removed section 8, officership and leadership: Robert has held no officer roles, so the empty Leadership folder was taken out instead of left as a placeholder.
+- Added Robert's portrait (from the robertterquin.com hero, cropped to 480 px) to About Me and the phone home screen, and set the year level to 4th year.

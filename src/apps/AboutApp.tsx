@@ -1,5 +1,5 @@
 import { profile, sections } from '../content';
-import { Button, LinkButton, PendingTag } from '../os';
+import { Button, LinkButton } from '../os';
 import type { Target } from './registry';
 import './AboutApp.css';
 
@@ -12,8 +12,19 @@ type AboutAppProps = {
 export function AboutApp({ onOpenApp, showIndex = true }: AboutAppProps) {
   return (
     <div className="about">
-      <p className="about__hello">Hi, I'm Robert.</p>
-      <p className="about__intro">{profile.intro}</p>
+      <div className="about__head">
+        <img
+          className="about__photo"
+          src={profile.photo.url}
+          alt={profile.photo.alt}
+          width={480}
+          height={480}
+        />
+        <div>
+          <p className="about__hello">Hi, I'm Robert.</p>
+          <p className="about__intro">{profile.intro}</p>
+        </div>
+      </div>
 
       <dl className="about__facts">
         <div>
@@ -28,7 +39,7 @@ export function AboutApp({ onOpenApp, showIndex = true }: AboutAppProps) {
         </div>
         <div>
           <dt>Year level</dt>
-          <dd>{profile.yearLevel ?? <PendingTag missing={profile.missing} />}</dd>
+          <dd>{profile.yearLevel}</dd>
         </div>
         <div>
           <dt>Email</dt>

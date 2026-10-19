@@ -80,10 +80,21 @@ export function PhoneHome() {
   return (
     <main className="phone" aria-label="Home screen">
       <section className="phone__widget" aria-label="About Robert">
-        <p className="phone__hello">Hi, I'm Robert.</p>
-        <p className="phone__sub">
-          {profile.program}, {profile.school}
-        </p>
+        <div className="phone__intro">
+          <img
+            className="phone__photo"
+            src={profile.photo.url}
+            alt={profile.photo.alt}
+            width={480}
+            height={480}
+          />
+          <div>
+            <p className="phone__hello">Hi, I'm Robert.</p>
+            <p className="phone__sub">
+              {profile.yearLevel}, {profile.program}, {profile.school}
+            </p>
+          </div>
+        </div>
         <p className="phone__hint">Tap an app to open a section.</p>
       </section>
 
