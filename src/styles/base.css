@@ -67,3 +67,20 @@ a {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Wallpapers, switched from the terminal: wallpaper dots | grid | stripes | plain */
+:root[data-wallpaper='grid'] body {
+  background-image:
+    linear-gradient(var(--desk-dot) 1px, transparent 1px),
+    linear-gradient(90deg, var(--desk-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+:root[data-wallpaper='stripes'] body {
+  background-image: repeating-linear-gradient(-45deg, var(--desk-dot) 0 2px, transparent 2px 16px);
+  background-size: auto;
+}
+
+:root[data-wallpaper='plain'] body {
+  background-image: none;
+}

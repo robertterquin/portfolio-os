@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './styles/tokens.css';
 import './styles/base.css';
 import App from './App.tsx';
+import { applySavedWallpaper } from './lib/wallpaper';
+
+applySavedWallpaper();
 
 // /?preview shows the component preview page. It only exists in development builds.
 const ComponentPreview = import.meta.env.DEV

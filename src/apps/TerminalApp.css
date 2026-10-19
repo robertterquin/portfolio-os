@@ -1,0 +1,80 @@
+/* The terminal keeps a dark screen in both themes, like a real one. */
+.term {
+  --term-bg: #16133a;
+  --term-text: #e9e6ff;
+  --term-muted: #b8b3e6;
+  --term-prompt: #9bebc8;
+  --term-error: #ff92be;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  margin: calc(-1 * var(--space-4));
+  padding: var(--space-4);
+  background: var(--term-bg);
+  color: var(--term-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  cursor: text;
+}
+
+.term__log {
+  flex: 1;
+}
+
+.term__line {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.term__line--out {
+  color: var(--term-muted);
+}
+
+.term__line--err {
+  color: var(--term-error);
+}
+
+.term__prompt {
+  color: var(--term-prompt);
+}
+
+.term__form {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.term__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--term-text);
+  caret-color: var(--term-prompt);
+  font: inherit;
+}
+
+.term__input:focus {
+  outline: none;
+}
+
+.term:focus-within {
+  box-shadow: inset 0 0 0 2px var(--term-prompt);
+}
+
+/* Phones: the terminal fills the whole app screen. */
+.phone__appbody:has(.term) {
+  display: flex;
+  padding: 0;
+}
+
+.phone__appbody .term {
+  flex: 1;
+  margin: 0;
+  padding-bottom: max(var(--space-4), env(safe-area-inset-bottom, 0px));
+}

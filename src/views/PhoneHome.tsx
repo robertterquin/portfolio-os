@@ -94,6 +94,13 @@ export function PhoneHome() {
           kind="file"
           onClick={() => window.open(profile.links.resume, '_blank', 'noopener')}
         />
+        <DesktopIcon
+          data-app-id="terminal"
+          className="phone__icon"
+          label="Terminal"
+          kind="terminal"
+          onClick={() => openApp('terminal')}
+        />
       </nav>
 
       {active && (

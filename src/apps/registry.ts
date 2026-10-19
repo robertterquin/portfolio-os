@@ -1,7 +1,7 @@
 import { sections, type SectionId } from '../content';
 import type { Accent, GlyphKind } from '../os';
 
-export type AppId = 'about' | 'viewer' | SectionId;
+export type AppId = 'about' | 'viewer' | 'terminal' | SectionId;
 
 export type AppMeta = {
   id: AppId;
@@ -57,7 +57,16 @@ export const viewerApp: AppMeta = {
   width: 520,
 };
 
-export const apps: AppMeta[] = [aboutApp, ...sectionApps, viewerApp];
+export const terminalApp: AppMeta = {
+  id: 'terminal',
+  windowTitle: 'Terminal',
+  label: 'Terminal',
+  accent: 'mint',
+  icon: 'terminal',
+  width: 540,
+};
+
+export const apps: AppMeta[] = [aboutApp, ...sectionApps, viewerApp, terminalApp];
 
 const byId = new Map(apps.map((app) => [app.id, app]));
 
@@ -73,4 +82,11 @@ export function isLinkableAppId(value: string): value is AppId {
 }
 
 /** Apps pinned to the dock. */
-export const dockAppIds: AppId[] = ['about', 'certifications', 'iot', 'capstone', 'competitions'];
+export const dockAppIds: AppId[] = [
+  'about',
+  'certifications',
+  'iot',
+  'capstone',
+  'competitions',
+  'terminal',
+];

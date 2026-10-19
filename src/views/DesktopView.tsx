@@ -9,7 +9,14 @@ import {
 } from 'react';
 import { AppContent } from '../apps/AppContent';
 import type { ViewerItem } from '../apps/parts';
-import { aboutApp, dockAppIds, getApp, sectionApps, type AppId } from '../apps/registry';
+import {
+  aboutApp,
+  dockAppIds,
+  getApp,
+  sectionApps,
+  terminalApp,
+  type AppId,
+} from '../apps/registry';
 import { sections, type SectionId } from '../content';
 import { readHashApp, replaceHash } from '../lib/hash';
 import { DesktopIcon, Dock, StickyNote, Window, type DockItem } from '../os';
@@ -18,7 +25,8 @@ import './DesktopView.css';
 
 const dockItems: DockItem[] = dockAppIds.map((id) => {
   const app = getApp(id);
-  return { id, label: app.label, kind: id === 'about' ? 'file' : 'app', accent: app.accent };
+  const kind = app.icon === 'folder' ? 'app' : app.icon;
+  return { id, label: app.label, kind, accent: app.accent };
 });
 
 const pendingBySection = new Map(sections.map((s) => [s.id, s.pendingCount]));
@@ -222,6 +230,7 @@ export function DesktopView() {
           selected={false}
           onClick={() => window.open('/resume.pdf', '_blank', 'noopener')}
         />
+        <DesktopIcon label={terminalApp.label} kind="terminal" {...iconProps('terminal')} />
       </nav>
 
       {stack.map((win, index) => {

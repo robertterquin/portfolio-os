@@ -1,3 +1,4 @@
+export { BootScreen } from './BootScreen';
 export { Button, LinkButton } from './Button';
 export { DesktopIcon } from './DesktopIcon';
 export { Dock, type DockItem } from './Dock';
