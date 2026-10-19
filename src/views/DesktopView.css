@@ -1,0 +1,63 @@
+.desktop {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  height: 100%;
+  overflow: hidden;
+}
+
+.desktop > .menubar {
+  position: relative;
+  z-index: var(--z-menubar);
+}
+
+.desk {
+  position: relative;
+  overflow: hidden;
+}
+
+.desk__icons {
+  position: absolute;
+  top: var(--space-4);
+  left: max(var(--space-3), env(safe-area-inset-left, 0px));
+  display: grid;
+  grid-template-columns: repeat(2, 112px);
+  gap: var(--space-2) var(--space-1);
+  z-index: var(--z-desktop);
+}
+
+.desk__window {
+  position: absolute;
+  animation: window-open var(--duration) var(--ease-out);
+  transform-origin: top left;
+}
+
+.desk__window:focus {
+  outline: none;
+}
+
+.desk__window:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@keyframes window-open {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+.desk__sticky {
+  position: absolute;
+  right: var(--space-6);
+  bottom: 112px;
+  z-index: 1;
+}
+
+.desk__dock {
+  position: absolute;
+  bottom: max(var(--space-3), env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  translate: -50% 0;
+  z-index: var(--z-dock);
+}

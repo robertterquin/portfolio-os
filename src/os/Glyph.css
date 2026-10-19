@@ -1,0 +1,40 @@
+.glyph {
+  display: block;
+  flex: none;
+  overflow: visible;
+}
+
+.glyph path,
+.glyph rect {
+  stroke: var(--line);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.glyph__shadow {
+  fill: var(--shadow-color);
+  stroke: none !important;
+}
+
+.glyph__fill {
+  fill: var(--accent);
+}
+
+.glyph__paper {
+  fill: var(--window);
+}
+
+.glyph__ink {
+  fill: var(--on-accent);
+}
+
+.glyph__detail {
+  fill: none;
+}
+
+.glyph__prompt {
+  fill: none;
+  stroke: var(--mint) !important;
+  stroke-width: 3 !important;
+}

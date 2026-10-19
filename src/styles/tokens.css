@@ -1,0 +1,126 @@
+/*
+ * student.os design tokens.
+ *
+ * Day is the default. Night applies when the OS prefers dark and the visitor has not
+ * picked Day, or when data-theme="night" is set. The [data-theme] selectors also work on
+ * any element, so the component preview can show both themes side by side.
+ */
+:root,
+[data-theme='day'] {
+  /* Surfaces */
+  --desk: #b9b4f5;
+  --desk-dot: #a29ceb;
+  --window: #ffffff;
+  --window-sunken: #f3f1ff;
+
+  /* Ink */
+  --ink: #16133a;
+  --ink-muted: #5d5890;
+  --line: #16133a;
+  --line-soft: #c9c4f0;
+  --shadow-color: #16133a;
+  --focus: #2a1fb8;
+
+  /* Accents: title bars, folders, tags. Text on them always uses --on-accent. */
+  --yellow: #ffd84d;
+  --pink: #ff92be;
+  --mint: #9bebc8;
+  --sticky: #fff27a;
+  --on-accent: #16133a;
+  --highlight: #fff6d1;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='day']) {
+    --desk: #221d4f;
+    --desk-dot: #2f2966;
+    --window: #2a2560;
+    --window-sunken: #221d4f;
+    --ink: #edebff;
+    --ink-muted: #b8b3e6;
+    --line: #c9c4ff;
+    --line-soft: #463f8f;
+    --shadow-color: #0b0920;
+    --focus: #ffd84d;
+    --highlight: #3b3470;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='night'],
+[data-theme='night'] {
+  --desk: #221d4f;
+  --desk-dot: #2f2966;
+  --window: #2a2560;
+  --window-sunken: #221d4f;
+  --ink: #edebff;
+  --ink-muted: #b8b3e6;
+  --line: #c9c4ff;
+  --line-soft: #463f8f;
+  --shadow-color: #0b0920;
+  --focus: #ffd84d;
+  --highlight: #3b3470;
+  color-scheme: dark;
+}
+
+:root {
+  /* Type */
+  --font-display: 'Silkscreen', 'Courier New', monospace;
+  --font-body: 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Courier Prime', 'Courier New', monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+
+  /* Type scale (px): 12 · 14 · 16 · 20 · 28 · 40 */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+
+  /* Spacing (px): 4 · 8 · 12 · 16 · 24 · 32 · 48 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Shape */
+  --border-width: 2px;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --shadow-hard: 6px 6px 0 var(--shadow-color);
+  --shadow-hard-sm: 3px 3px 0 var(--shadow-color);
+
+  /* Chrome sizes */
+  --menubar-height: 32px;
+  --titlebar-height: 34px;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration: 200ms;
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Layers */
+  --z-desktop: 0;
+  --z-window: 10;
+  --z-sticky: 900;
+  --z-dock: 1000;
+  --z-menubar: 1100;
+}
+
+/* Accent helpers: set --accent on a component, then use var(--accent) inside it. */
+.accent-yellow {
+  --accent: var(--yellow);
+}
+.accent-pink {
+  --accent: var(--pink);
+}
+.accent-mint {
+  --accent: var(--mint);
+}
