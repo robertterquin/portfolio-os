@@ -50,9 +50,6 @@ export function AchievementsApp({ onViewCertificate }: { onViewCertificate: View
           ))}
         </ul>
       )}
-      <EmptyState title="More achievements on the way">
-        <p>Scholarships, trainings, workshops, seminars, and certificates of participation.</p>
-      </EmptyState>
     </>
   );
 }

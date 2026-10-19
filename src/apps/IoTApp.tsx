@@ -1,5 +1,5 @@
 import { iotProject as iot } from '../content';
-import { MyRolePanel, PendingTag } from '../os';
+import { MyRolePanel } from '../os';
 import { FlowDiagram } from './FlowDiagram';
 import { photosOf } from './evidence';
 import { AppIntro, Block, Chips, EvidenceActions, Gallery, MissingList, StatusPill } from './parts';
@@ -13,9 +13,8 @@ export function IoTApp() {
       <header className="project-head">
         <h3 className="project-head__title">{iot.title}</h3>
         <StatusPill status={iot.status} />
-        <PendingTag missing={iot.missing} />
       </header>
-      <AppIntro>{iot.summary}</AppIntro>
+      {iot.summary && <AppIntro>{iot.summary}</AppIntro>}
 
       {iot.objectives.length > 0 && (
         <Block title="Objectives">

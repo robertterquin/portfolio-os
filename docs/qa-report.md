@@ -36,10 +36,10 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
 | External links (14)                                                                  | ✅ All return 200. LinkedIn returns 999 to scripts (its bot block), same URL as on robertterquin.com |
 | Local images and resume (14 files)                                                   | ✅ All present; all 7 certificate images open in the Certificate Viewer                              |
-| Deep links on a fresh load: `#certifications` … `#leadership`, `#stack`, `#terminal` | ✅ Each opens the right window on top of About Me                                                    |
+| Deep links on a fresh load: `#certifications` … `#leadership`, `#stack`, `#terminal` | ✅ Each opens the right window on top of About Me; 1, 2, 7 open Certificates at their part           |
 | Bad links (`#viewer`, `#nonsense`)                                                   | ✅ Fall back to About Me with a clean address                                                        |
 | `?view=list#capstone`                                                                | ✅ Opens List view at Capstone (fixed during QA: it used to stay at the top)                         |
-| Phone deep link (`#competitions` at 375 px)                                          | ✅ Opens Trophies full screen, no sideways scrolling                                                 |
+| Phone deep link (`#competitions` at 375 px)                                          | ✅ Opens Certificates full screen at Competitions, no sideways scrolling                             |
 | Console errors on the production build                                               | ✅ None                                                                                              |
 | Lighthouse, desktop                                                                  | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
 | Lighthouse, List view                                                                | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
@@ -59,3 +59,9 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 - List view didn't jump to the linked section on page load (`?view=list#capstone`).
 - Added a "My role" slot for team competitions, and flagged HackForGov as needing it.
 - README now explains the views, section links, `?view=list`, and the terminal.
+
+## Changed after QA
+
+- Certifications, course completions, and competitions are now one **Certificates** window with three parts, instead of three folders that each showed some of the certificates. The parts keep the requirement's wording so items 1, 2, and 7 are easy to find.
+- Removed repeated text: the "Information Technology Specialist certification" line on every Certiport entry, "Awarded to" in the Certificate Viewer, duplicate About buttons, the section index in List view's About (the sidebar already lists them), extra "coming soon" tags on IoT and Capstone, and a filler note in Achievements.
+- Fixed links to a section landing short when web fonts loaded after the jump.

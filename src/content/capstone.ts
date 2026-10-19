@@ -3,7 +3,7 @@ import type { Capstone } from './types';
 // Not on robertterquin.com. Every field below is a placeholder until Robert sends the details.
 export const capstone: Capstone = {
   title: 'Capstone project',
-  summary: 'Project details are on the way.',
+  summary: '',
   objectives: [],
   tech: [],
   team: [],

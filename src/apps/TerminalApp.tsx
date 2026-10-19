@@ -1,9 +1,9 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
-import type { AppId } from './registry';
+import type { Target } from './registry';
 import { run, welcomeLines, type Line } from './terminalCommands';
 import './TerminalApp.css';
 
-export function TerminalApp({ onOpenApp }: { onOpenApp: (id: AppId) => void }) {
+export function TerminalApp({ onOpenApp }: { onOpenApp: (target: Target) => void }) {
   const [lines, setLines] = useState<Line[]>(welcomeLines);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);

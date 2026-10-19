@@ -2,41 +2,49 @@ import { useCallback, useEffect, useState } from 'react';
 import { AboutApp } from '../apps/AboutApp';
 import { AppContent } from '../apps/AppContent';
 import type { ViewerItem } from '../apps/parts';
-import { aboutApp, sectionApps, stackApp, type AppId } from '../apps/registry';
+import { aboutApp, folderApps, resolveTarget, stackApp, type Target } from '../apps/registry';
 import { TechStackApp } from '../apps/TechStackApp';
 import { ViewerDialog } from '../apps/ViewerDialog';
 import { sections } from '../content';
-import { readHashApp, replaceHash } from '../lib/hash';
+import { readHashTarget, replaceHash } from '../lib/hash';
+import { revealElement } from '../lib/reveal';
 import { Window } from '../os';
 import './ListView.css';
 
-const requirementOf = new Map(sections.map((s) => [s.id as AppId, s.requirement]));
+const numberOf = new Map(sections.map((s, index) => [s.id as string, index + 1]));
+const requirementOf = new Map(sections.map((s) => [s.id as string, s.requirement]));
 
-function scrollToSection(id: AppId, { animate = true } = {}) {
-  const smooth = animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const el = document.getElementById(`list-${id}`);
-  // Focus first: moving focus during a smooth scroll can cancel the scroll.
-  el?.focus({ preventScroll: true });
-  el?.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+/** "3. IoT project", or "1, 2, 7. Certificates" for the window that holds three sections. */
+function listTitle(app: (typeof folderApps)[number]) {
+  const ids = app.sections ?? [];
+  const numbers = ids.map((id) => numberOf.get(id)).join(', ');
+  const name = ids.length === 1 ? requirementOf.get(ids[0]) : app.label;
+  return `${numbers}. ${name}`;
 }
 
-/** Every section on one plain scrolling page, in the order the requirement lists them. */
+/** Scrolls to a section: its own window, or its part of a shared window. */
+function scrollToTarget(target: Target, { animate = true } = {}) {
+  const { app, part } = resolveTarget(target);
+  revealElement(part ? `part-${part}` : `list-${app}`, { animate });
+}
+
+/** Every section on one plain scrolling page. The section list follows the requirement's order. */
 export function ListView() {
   const [viewerItem, setViewerItem] = useState<ViewerItem | null>(null);
 
-  const goTo = useCallback((id: AppId) => {
-    replaceHash(id === 'about' ? null : id);
-    scrollToSection(id);
+  const goTo = useCallback((target: Target) => {
+    replaceHash(target === 'about' ? null : target);
+    scrollToTarget(target);
   }, []);
 
   // Open on the section named in the link, and follow links like #iot.
   useEffect(() => {
-    const fromLink = readHashApp();
+    const fromLink = readHashTarget();
     // Landing on a link jumps straight there; later jumps animate.
-    if (fromLink) scrollToSection(fromLink, { animate: false });
+    if (fromLink) scrollToTarget(fromLink, { animate: false });
     const onHashChange = () => {
-      const id = readHashApp();
-      if (id) goTo(id);
+      const target = readHashTarget();
+      if (target) goTo(target);
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -48,16 +56,16 @@ export function ListView() {
         <nav className="listview__toc" aria-label="Jump to a section">
           <p className="listview__toc-title">Sections</p>
           <ol>
-            {sectionApps.map((app) => (
-              <li key={app.id}>
+            {sections.map((section) => (
+              <li key={section.id}>
                 <a
-                  href={`#${app.id}`}
+                  href={`#${section.id}`}
                   onClick={(event) => {
                     event.preventDefault();
-                    goTo(app.id);
+                    goTo(section.id);
                   }}
                 >
-                  {requirementOf.get(app.id)}
+                  {section.requirement}
                 </a>
               </li>
             ))}
@@ -71,7 +79,7 @@ export function ListView() {
             className="listview__window"
             rootProps={{ id: 'list-about', tabIndex: -1 }}
           >
-            <AboutApp onOpenApp={goTo} />
+            <AboutApp onOpenApp={goTo} showIndex={false} />
           </Window>
 
           <Window
@@ -83,10 +91,10 @@ export function ListView() {
             <TechStackApp />
           </Window>
 
-          {sectionApps.map((app, index) => (
+          {folderApps.map((app) => (
             <Window
               key={app.id}
-              title={`${index + 1}. ${requirementOf.get(app.id)}`}
+              title={listTitle(app)}
               accent={app.accent}
               className="listview__window"
               rootProps={{ id: `list-${app.id}`, tabIndex: -1 }}

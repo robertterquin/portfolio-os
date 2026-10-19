@@ -2,20 +2,18 @@ import { AboutApp } from './AboutApp';
 import { AchievementsApp } from './AchievementsApp';
 import { CapstoneApp } from './CapstoneApp';
 import { CertificateViewer } from './CertificateViewer';
-import { CertificationsApp } from './CertificationsApp';
-import { CoursesApp } from './CoursesApp';
+import { CertificatesApp } from './CertificatesApp';
 import { IoTApp } from './IoTApp';
 import { LeadershipApp } from './LeadershipApp';
 import type { ViewCertificate, ViewerItem } from './parts';
 import { ProjectsApp } from './ProjectsApp';
-import type { AppId } from './registry';
+import type { AppId, Target } from './registry';
 import { TechStackApp } from './TechStackApp';
 import { TerminalApp } from './TerminalApp';
-import { TrophiesApp } from './TrophiesApp';
 
 type AppContentProps = {
   id: AppId;
-  onOpenApp: (id: AppId) => void;
+  onOpenApp: (target: Target) => void;
   onViewCertificate: ViewCertificate;
   viewerItem: ViewerItem | null;
 };
@@ -27,10 +25,8 @@ export function AppContent({ id, onOpenApp, onViewCertificate, viewerItem }: App
       return <AboutApp onOpenApp={onOpenApp} />;
     case 'viewer':
       return <CertificateViewer item={viewerItem} />;
-    case 'certifications':
-      return <CertificationsApp onViewCertificate={onViewCertificate} />;
-    case 'courses':
-      return <CoursesApp onViewCertificate={onViewCertificate} />;
+    case 'certificates':
+      return <CertificatesApp onViewCertificate={onViewCertificate} />;
     case 'iot':
       return <IoTApp />;
     case 'capstone':
@@ -39,8 +35,6 @@ export function AppContent({ id, onOpenApp, onViewCertificate, viewerItem }: App
       return <ProjectsApp />;
     case 'achievements':
       return <AchievementsApp onViewCertificate={onViewCertificate} />;
-    case 'competitions':
-      return <TrophiesApp onViewCertificate={onViewCertificate} />;
     case 'leadership':
       return <LeadershipApp />;
     case 'stack':

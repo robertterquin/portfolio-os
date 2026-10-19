@@ -3,7 +3,7 @@ import type { IoTProject } from './types';
 // Nothing about the IoT project was found online. Every field below is a placeholder.
 export const iotProject: IoTProject = {
   title: 'IoT project',
-  summary: 'Project details are on the way.',
+  summary: '',
   objectives: [],
   components: [],
   myRole: '',

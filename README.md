@@ -36,7 +36,7 @@ All portfolio content lives in `src/content/`, one file per section:
 | `competitions.ts`   | 7. Competitions and awards           |
 | `leadership.ts`     | 8. Officership and leadership        |
 
-Skills for the Tech Stack folder live in `profile.ts` under `skills`.
+Sections 1, 2, and 7 are all certificates, so they share one **Certificates** window, each in its own part headed with the requirement's wording. Skills for the Tech Stack folder live in `profile.ts` under `skills`.
 
 Put certificate files in `public/certificates/` and project images in `public/projects/`, then link them from an entry's `evidence` list, for example `{ label: 'Certificate', kind: 'certificate', url: '/certificates/it-specialist-databases.webp', alt: '…' }`. Photos and certificate images need `alt` text describing what they show.
 
@@ -47,7 +47,7 @@ Every entry can carry a `missing` list naming details that still have to be conf
 - **Desktop** (768 px and wider): folders open as draggable windows. Esc closes the active window.
 - **Phone**: a home screen of apps; each opens full screen.
 - **List view**: every section on one scrolling page. Toggle it from the menu bar, or share a link with `?view=list`.
-- **Links to a section**: add the section id, e.g. `#capstone`, `#certifications`, `#stack`, `#terminal`.
+- **Links to a section**: add the section id, e.g. `#capstone`, `#stack`, `#terminal`. `#certifications`, `#courses`, and `#competitions` open Certificates at that part.
 - **Terminal**: type `help` for the commands.
 
 ## Project docs

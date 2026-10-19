@@ -1,5 +1,5 @@
 import { capstone as cap } from '../content';
-import { MyRolePanel, PendingTag } from '../os';
+import { MyRolePanel } from '../os';
 import { photosOf } from './evidence';
 import {
   AppIntro,
@@ -19,9 +19,8 @@ export function CapstoneApp() {
       <header className="project-head">
         <h3 className="project-head__title">{cap.title}</h3>
         <StatusPill status={cap.status} />
-        <PendingTag missing={cap.missing} />
       </header>
-      <AppIntro>{cap.summary}</AppIntro>
+      {cap.summary && <AppIntro>{cap.summary}</AppIntro>}
 
       {cap.progress !== undefined && <ProgressBar value={cap.progress} label="Capstone progress" />}
 

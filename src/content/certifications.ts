@@ -13,7 +13,6 @@ export const certifications: Certification[] = [
     id: 'its-cybersecurity',
     title: 'IT Specialist in Cybersecurity',
     issuer: 'Certiport',
-    credential: 'Information Technology Specialist certification',
     dateEarned: '2026-06-03',
     evidence: [
       {
@@ -29,7 +28,6 @@ export const certifications: Certification[] = [
     id: 'html-css-specialist',
     title: 'HTML and CSS Specialist',
     issuer: 'Certiport',
-    credential: 'Information Technology Specialist certification',
     dateEarned: '2026-02-04',
     evidence: [
       {
@@ -45,7 +43,6 @@ export const certifications: Certification[] = [
     id: 'its-databases',
     title: 'IT Specialist in Databases',
     issuer: 'Certiport',
-    credential: 'Information Technology Specialist certification',
     dateEarned: '2025-05-07',
     evidence: [
       {

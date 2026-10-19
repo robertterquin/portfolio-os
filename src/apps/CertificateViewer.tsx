@@ -1,4 +1,3 @@
-import { profile } from '../content';
 import { formatDate } from '../lib/date';
 import { LinkButton } from '../os';
 import { linksOf } from './evidence';
@@ -11,7 +10,7 @@ export function CertificateViewer({ item }: { item: ViewerItem | null }) {
   if (!item) {
     return (
       <EmptyState title="No certificate selected">
-        <p>Open Certifications, Courses, or Trophies and choose an entry to see its certificate.</p>
+        <p>Open Certificates and choose an entry to see its certificate.</p>
       </EmptyState>
     );
   }
@@ -63,10 +62,6 @@ export function CertificateViewer({ item }: { item: ViewerItem | null }) {
         <div>
           <dt>{item.kind === 'Competition' ? 'Date' : 'Date earned'}</dt>
           <dd>{formatDate(item.date)}</dd>
-        </div>
-        <div>
-          <dt>Awarded to</dt>
-          <dd>{profile.fullName}</dd>
         </div>
       </dl>
 

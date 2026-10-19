@@ -12,14 +12,17 @@ import type { ViewerItem } from '../apps/parts';
 import {
   aboutApp,
   dockAppIds,
+  folderApps,
   getApp,
-  sectionApps,
+  pendingCountOf,
+  resolveTarget,
   stackApp,
   terminalApp,
   type AppId,
+  type Target,
 } from '../apps/registry';
-import { sections, type SectionId } from '../content';
-import { readHashApp, replaceHash } from '../lib/hash';
+import { readHashTarget, replaceHash } from '../lib/hash';
+import { revealElement } from '../lib/reveal';
 import { DesktopIcon, Dock, StickyNote, Window, type DockItem } from '../os';
 import { clampPosition, useWindowManager, type Bounds } from '../os/windowManager';
 import './DesktopView.css';
@@ -29,8 +32,6 @@ const dockItems: DockItem[] = dockAppIds.map((id) => {
   const kind = app.icon === 'folder' ? 'app' : app.icon;
   return { id, label: app.label, kind, accent: app.accent };
 });
-
-const pendingBySection = new Map(sections.map((s) => [s.id, s.pendingCount]));
 
 /** Single click selects an icon, double click opens it. Keyboard and touch open on one press. */
 function opensOnSingleClick(event: MouseEvent) {
@@ -44,10 +45,18 @@ function viewportBounds(): Bounds {
 
 /** First load: About Me, plus the window named in the link (e.g. #capstone) on top. */
 function initialWindows() {
-  const fromLink = readHashApp();
+  const target = readHashTarget();
+  const fromLink = target ? resolveTarget(target).app : null;
   const ids: AppId[] = ['about'];
   if (fromLink && fromLink !== 'about') ids.push(fromLink);
   return ids.map((id) => ({ id, preferredWidth: getApp(id).width }));
+}
+
+/** A first-load link to part of a window, e.g. #courses, scrolls there once the window renders. */
+function linkedPart() {
+  const target = readHashTarget();
+  const resolved = target ? resolveTarget(target) : null;
+  return resolved?.part ? resolved : null;
 }
 
 export function DesktopView() {
@@ -62,10 +71,15 @@ export function DesktopView() {
     bounds,
   );
 
-  const [selected, setSelected] = useState<AppId | null>('certifications');
+  const [selected, setSelected] = useState<AppId | null>('certificates');
   const [viewerItem, setViewerItem] = useState<ViewerItem | null>(null);
   const windowEls = useRef(new Map<AppId, HTMLElement>());
-  const pendingFocus = useRef<AppId | null>(null);
+  // The window to focus once it renders, and the part of it a link asked for (#courses).
+  const [firstPart] = useState(linkedPart);
+  const pendingFocus = useRef<{ app: AppId; part?: string; animate?: boolean } | null>(
+    // Landing on a link jumps straight to the part; later jumps animate.
+    firstPart && { ...firstPart, animate: false },
+  );
 
   // Track the desktop size so windows stay reachable when the browser is resized.
   useLayoutEffect(() => {
@@ -81,18 +95,20 @@ export function DesktopView() {
     return () => observer.disconnect();
   }, [fit]);
 
-  const focusWindow = (id: AppId) => {
+  const focusWindow = (id: AppId, part?: string, animate = true) => {
+    if (part && revealElement(`part-${part}`, { animate })) return;
     const el = windowEls.current.get(id);
     if (el && !el.contains(document.activeElement)) el.focus();
   };
 
   const openApp = useCallback(
-    (id: AppId) => {
+    (target: Target) => {
+      const { app: id, part } = resolveTarget(target);
       open(id, getApp(id).width);
       if (id !== 'viewer') setSelected(id);
       // Focus now if the window is already on screen, otherwise once it renders.
-      if (windowEls.current.has(id)) focusWindow(id);
-      else pendingFocus.current = id;
+      if (windowEls.current.has(id)) focusWindow(id, part);
+      else pendingFocus.current = { app: id, part };
     },
     [open],
   );
@@ -107,10 +123,10 @@ export function DesktopView() {
 
   // Move keyboard focus into a window the visitor just opened.
   useEffect(() => {
-    const id = pendingFocus.current;
-    if (!id || !windowEls.current.has(id)) return;
+    const pending = pendingFocus.current;
+    if (!pending || !windowEls.current.has(pending.app)) return;
     pendingFocus.current = null;
-    focusWindow(id);
+    focusWindow(pending.app, pending.part, pending.animate);
   }, [stack]);
 
   const returnFocusToIcon = (id: AppId) => {
@@ -133,8 +149,8 @@ export function DesktopView() {
   // Links like #iot open that window, including links inside other windows.
   useEffect(() => {
     const onHashChange = () => {
-      const id = readHashApp();
-      if (id) openApp(id);
+      const target = readHashTarget();
+      if (target) openApp(target);
     };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
@@ -210,8 +226,8 @@ export function DesktopView() {
       }}
     >
       <nav className="desk__icons" aria-label="Portfolio sections">
-        {sectionApps.map((app) => {
-          const pending = pendingBySection.get(app.id as SectionId) ?? 0;
+        {folderApps.map((app) => {
+          const pending = pendingCountOf(app);
           return (
             <DesktopIcon
               key={app.id}

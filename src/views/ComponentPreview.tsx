@@ -44,16 +44,16 @@ const typeScale = [
 ];
 
 const dockItems: DockItem[] = [
-  { id: 'certifications', label: 'Certifications', kind: 'app', accent: 'mint' },
+  { id: 'certificates', label: 'Certificates', kind: 'app', accent: 'mint' },
   { id: 'iot', label: 'IoT Lab', kind: 'app', accent: 'mint' },
   { id: 'capstone', label: 'Capstone', kind: 'app', accent: 'pink' },
-  { id: 'competitions', label: 'Trophies', kind: 'app', accent: 'yellow' },
+  { id: 'projects', label: '3rd-year projects', kind: 'app', accent: 'yellow' },
   { id: 'terminal', label: 'Terminal', kind: 'terminal' },
 ];
 
 function Board({ theme }: { theme: Theme }) {
   const [listView, setListView] = useState(false);
-  const [selected, setSelected] = useState<string | null>('certifications');
+  const [selected, setSelected] = useState<string | null>('certificates');
   const [lastOpened, setLastOpened] = useState('nothing yet');
 
   return (

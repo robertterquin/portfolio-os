@@ -1,7 +1,20 @@
 import { sections, type SectionId } from '../content';
 import type { Accent, GlyphKind } from '../os';
 
-export type AppId = 'about' | 'stack' | 'viewer' | 'terminal' | SectionId;
+export type AppId =
+  | 'about'
+  | 'certificates'
+  | 'iot'
+  | 'capstone'
+  | 'projects'
+  | 'achievements'
+  | 'leadership'
+  | 'stack'
+  | 'viewer'
+  | 'terminal';
+
+/** Anything a link or button can open: an app, or one of the 8 required sections. */
+export type Target = AppId | SectionId;
 
 export type AppMeta = {
   id: AppId;
@@ -13,20 +26,24 @@ export type AppMeta = {
   icon: GlyphKind;
   /** Preferred window width in px; shrinks to fit small screens. */
   width: number;
+  /** The required sections this window covers, in requirement order. */
+  sections?: SectionId[];
 };
 
-const windowTitles: Record<SectionId, string> = {
-  certifications: 'Certifications',
-  courses: 'Courses',
-  iot: 'IoT_Lab.app',
-  capstone: 'Capstone.app',
-  projects: '3rd-year projects',
-  achievements: 'Achievements',
-  competitions: 'Trophies',
-  leadership: 'Leadership',
-};
+/**
+ * Certifications, course completions, and competition awards are all certificates, so they
+ * share one window. Each keeps its own part, headed with the requirement's wording.
+ */
+export const certificateSections: SectionId[] = ['certifications', 'courses', 'competitions'];
 
-const wideApps: SectionId[] = ['iot', 'capstone', 'projects'];
+const isCertificateSection = (id: string): id is SectionId =>
+  (certificateSections as string[]).includes(id);
+
+/** The window a target opens in, and the part of that window to scroll to. */
+export function resolveTarget(target: Target): { app: AppId; part?: SectionId } {
+  if (isCertificateSection(target)) return { app: 'certificates', part: target };
+  return { app: target as AppId };
+}
 
 export const aboutApp: AppMeta = {
   id: 'about',
@@ -37,15 +54,40 @@ export const aboutApp: AppMeta = {
   width: 440,
 };
 
-/** The 8 required sections, in the order the midterm requirement lists them. */
-export const sectionApps: AppMeta[] = sections.map((s) => ({
-  id: s.id,
-  windowTitle: windowTitles[s.id],
-  label: s.label,
-  accent: s.accent,
+export const certificatesApp: AppMeta = {
+  id: 'certificates',
+  windowTitle: 'Certificates',
+  label: 'Certificates',
+  accent: 'mint',
   icon: 'folder',
-  width: wideApps.includes(s.id) ? 600 : 520,
-}));
+  width: 560,
+  sections: certificateSections,
+};
+
+const sectionWindows: { id: SectionId & AppId; windowTitle: string; width: number }[] = [
+  { id: 'iot', windowTitle: 'IoT_Lab.app', width: 600 },
+  { id: 'capstone', windowTitle: 'Capstone.app', width: 600 },
+  { id: 'projects', windowTitle: '3rd-year projects', width: 600 },
+  { id: 'achievements', windowTitle: 'Achievements', width: 520 },
+  { id: 'leadership', windowTitle: 'Leadership', width: 520 },
+];
+
+/** The desktop folders that hold the 8 required sections. */
+export const folderApps: AppMeta[] = [
+  certificatesApp,
+  ...sectionWindows.map(({ id, windowTitle, width }) => {
+    const section = sections.find((s) => s.id === id)!;
+    return {
+      id,
+      windowTitle,
+      label: section.label,
+      accent: section.accent,
+      icon: 'folder' as const,
+      width,
+      sections: [id],
+    };
+  }),
+];
 
 /** Not one of the 8 required sections: an extra folder for technical skills. */
 export const stackApp: AppMeta = {
@@ -76,7 +118,7 @@ export const terminalApp: AppMeta = {
   width: 540,
 };
 
-export const apps: AppMeta[] = [aboutApp, ...sectionApps, stackApp, viewerApp, terminalApp];
+export const apps: AppMeta[] = [aboutApp, ...folderApps, stackApp, viewerApp, terminalApp];
 
 const byId = new Map(apps.map((app) => [app.id, app]));
 
@@ -86,17 +128,28 @@ export function getApp(id: AppId): AppMeta {
   return app;
 }
 
-/** Apps that can be opened from a link such as #capstone. The viewer needs an entry, so it can't. */
-export function isLinkableAppId(value: string): value is AppId {
-  return value !== 'viewer' && byId.has(value as AppId);
+/** Entries still waiting on details, across every section a window covers. */
+export function pendingCountOf(app: AppMeta): number {
+  return sections
+    .filter((s) => app.sections?.includes(s.id))
+    .reduce((sum, s) => sum + s.pendingCount, 0);
+}
+
+/**
+ * Targets that can be opened from a link such as #capstone or #courses.
+ * The viewer needs an entry, so it can't.
+ */
+export function isLinkableTarget(value: string): value is Target {
+  if (value === 'viewer') return false;
+  return byId.has(value as AppId) || sections.some((s) => s.id === value);
 }
 
 /** Apps pinned to the dock. */
 export const dockAppIds: AppId[] = [
   'about',
-  'certifications',
+  'certificates',
   'iot',
   'capstone',
-  'competitions',
+  'projects',
   'terminal',
 ];

@@ -1,30 +1,51 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { AppContent } from '../apps/AppContent';
 import type { ViewerItem } from '../apps/parts';
-import { aboutApp, getApp, sectionApps, type AppId } from '../apps/registry';
+import {
+  aboutApp,
+  folderApps,
+  getApp,
+  pendingCountOf,
+  resolveTarget,
+  type AppId,
+  type Target,
+} from '../apps/registry';
 import { ViewerDialog } from '../apps/ViewerDialog';
-import { profile, sections, type SectionId } from '../content';
-import { readHashApp, replaceHash } from '../lib/hash';
+import { profile } from '../content';
+import { readHashTarget, replaceHash } from '../lib/hash';
+import { revealElement } from '../lib/reveal';
 import { accentClass, DesktopIcon } from '../os';
 import './PhoneHome.css';
 
-const pendingBySection = new Map(sections.map((s) => [s.id, s.pendingCount]));
+/** The app named in the address, and the part of it to scroll to. */
+function appInHash(): { app: AppId | null; part?: string } {
+  const target = readHashTarget();
+  return target ? resolveTarget(target) : { app: null };
+}
 
 /** Phones: a home screen of app icons. Each app opens full screen with a Back button. */
 export function PhoneHome() {
-  const [activeId, setActiveId] = useState<AppId | null>(readHashApp);
+  const [activeId, setActiveId] = useState<AppId | null>(() => appInHash().app);
   const [viewerItem, setViewerItem] = useState<ViewerItem | null>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  // The part of the app a link asked for, e.g. #courses inside Certificates.
+  const pendingPart = useRef<string | undefined>(appInHash().part);
 
   // The address drives which app is open, so the phone's own back gesture closes it.
   useEffect(() => {
-    const onHashChange = () => setActiveId(readHashApp());
+    const onHashChange = () => {
+      const { app, part } = appInHash();
+      pendingPart.current = part;
+      setActiveId(app);
+      // Already open: the effect below won't run again, so scroll here.
+      if (part && revealElement(`part-${part}`)) pendingPart.current = undefined;
+    };
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
-  const openApp = useCallback((id: AppId) => {
-    location.hash = id;
+  const openApp = useCallback((target: Target) => {
+    location.hash = target;
   }, []);
 
   const goHome = useCallback(() => {
@@ -37,7 +58,9 @@ export function PhoneHome() {
   useEffect(() => {
     if (activeId) {
       lastOpened.current = activeId;
-      headingRef.current?.focus();
+      const part = pendingPart.current;
+      pendingPart.current = undefined;
+      if (!part || !revealElement(`part-${part}`, { animate: false })) headingRef.current?.focus();
     } else if (lastOpened.current) {
       document.querySelector<HTMLElement>(`[data-app-id="${lastOpened.current}"]`)?.focus();
     }
@@ -65,8 +88,8 @@ export function PhoneHome() {
       </section>
 
       <nav className="phone__grid" aria-label="Portfolio sections">
-        {sectionApps.map((app) => {
-          const pending = pendingBySection.get(app.id as SectionId) ?? 0;
+        {folderApps.map((app) => {
+          const pending = pendingCountOf(app);
           return (
             <DesktopIcon
               key={app.id}

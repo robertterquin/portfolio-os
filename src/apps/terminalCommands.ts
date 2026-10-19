@@ -1,11 +1,11 @@
 import { profile, sections } from '../content';
 import { isWallpaper, REBOOT_EVENT, setWallpaper, wallpapers } from '../lib/wallpaper';
-import type { AppId } from './registry';
+import type { Target } from './registry';
 
 export type Line = { kind: 'in' | 'out' | 'err'; text: string };
 
 type Context = {
-  openApp: (id: AppId) => void;
+  openApp: (target: Target) => void;
 };
 
 /** What `run` returns: lines to print, or 'clear' to wipe the screen. */
@@ -23,11 +23,12 @@ const help = [
   '  clear             clear the screen',
 ];
 
-function findSection(query: string): AppId | null {
+function findSection(query: string): Target | null {
   const q = query.trim().toLowerCase();
   if (!q) return null;
   if (q === 'about' || q === 'about_me' || q === 'about_me.txt') return 'about';
   if (['stack', 'tech', 'tech stack', 'skills'].includes(q)) return 'stack';
+  if (['certificates', 'certs'].includes(q)) return 'certificates';
   const byNumber = Number(q);
   if (Number.isInteger(byNumber) && byNumber >= 1 && byNumber <= sections.length) {
     return sections.at(byNumber - 1)?.id ?? null;
