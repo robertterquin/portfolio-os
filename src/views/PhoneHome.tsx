@@ -82,6 +82,14 @@ export function PhoneHome() {
           );
         })}
         <DesktopIcon
+          data-app-id="stack"
+          className="phone__icon"
+          label="Tech Stack"
+          kind="app"
+          accent="mint"
+          onClick={() => openApp('stack')}
+        />
+        <DesktopIcon
           data-app-id="about"
           className="phone__icon"
           label="About me"

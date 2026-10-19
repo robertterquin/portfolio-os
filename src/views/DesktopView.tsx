@@ -14,6 +14,7 @@ import {
   dockAppIds,
   getApp,
   sectionApps,
+  stackApp,
   terminalApp,
   type AppId,
 } from '../apps/registry';
@@ -223,6 +224,12 @@ export function DesktopView() {
             />
           );
         })}
+        <DesktopIcon
+          label={stackApp.label}
+          kind="folder"
+          accent={stackApp.accent}
+          {...iconProps('stack')}
+        />
         <DesktopIcon label={aboutApp.label} kind="file" {...iconProps('about')} />
         <DesktopIcon
           label="resume.pdf"

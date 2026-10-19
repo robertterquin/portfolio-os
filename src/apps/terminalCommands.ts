@@ -16,7 +16,7 @@ const help = [
   '  whoami            who built this',
   '  ls                list the portfolio sections',
   '  open <section>    open a section, e.g. open capstone or open 4',
-  '  skills            technical skills',
+  '  skills            technical skills (or open stack)',
   '  contact           email and links',
   '  wallpaper <name>  change the desktop: ' + wallpapers.join(', '),
   '  date              today’s date',
@@ -27,6 +27,7 @@ function findSection(query: string): AppId | null {
   const q = query.trim().toLowerCase();
   if (!q) return null;
   if (q === 'about' || q === 'about_me' || q === 'about_me.txt') return 'about';
+  if (['stack', 'tech', 'tech stack', 'skills'].includes(q)) return 'stack';
   const byNumber = Number(q);
   if (Number.isInteger(byNumber) && byNumber >= 1 && byNumber <= sections.length) {
     return sections.at(byNumber - 1)?.id ?? null;

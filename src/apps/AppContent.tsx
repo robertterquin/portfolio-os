@@ -9,6 +9,7 @@ import { LeadershipApp } from './LeadershipApp';
 import type { ViewCertificate, ViewerItem } from './parts';
 import { ProjectsApp } from './ProjectsApp';
 import type { AppId } from './registry';
+import { TechStackApp } from './TechStackApp';
 import { TerminalApp } from './TerminalApp';
 import { TrophiesApp } from './TrophiesApp';
 
@@ -42,6 +43,8 @@ export function AppContent({ id, onOpenApp, onViewCertificate, viewerItem }: App
       return <TrophiesApp onViewCertificate={onViewCertificate} />;
     case 'leadership':
       return <LeadershipApp />;
+    case 'stack':
+      return <TechStackApp />;
     case 'terminal':
       return <TerminalApp onOpenApp={onOpenApp} />;
   }

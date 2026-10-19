@@ -1,7 +1,7 @@
 import { sections, type SectionId } from '../content';
 import type { Accent, GlyphKind } from '../os';
 
-export type AppId = 'about' | 'viewer' | 'terminal' | SectionId;
+export type AppId = 'about' | 'stack' | 'viewer' | 'terminal' | SectionId;
 
 export type AppMeta = {
   id: AppId;
@@ -47,6 +47,16 @@ export const sectionApps: AppMeta[] = sections.map((s) => ({
   width: wideApps.includes(s.id) ? 600 : 520,
 }));
 
+/** Not one of the 8 required sections: an extra folder for technical skills. */
+export const stackApp: AppMeta = {
+  id: 'stack',
+  windowTitle: 'Tech Stack',
+  label: 'Tech Stack',
+  accent: 'mint',
+  icon: 'folder',
+  width: 520,
+};
+
 /** Shared window for certificate files. Opened from entries, not from the desktop. */
 export const viewerApp: AppMeta = {
   id: 'viewer',
@@ -66,7 +76,7 @@ export const terminalApp: AppMeta = {
   width: 540,
 };
 
-export const apps: AppMeta[] = [aboutApp, ...sectionApps, viewerApp, terminalApp];
+export const apps: AppMeta[] = [aboutApp, ...sectionApps, stackApp, viewerApp, terminalApp];
 
 const byId = new Map(apps.map((app) => [app.id, app]));
 

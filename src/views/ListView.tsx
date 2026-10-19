@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { AboutApp } from '../apps/AboutApp';
 import { AppContent } from '../apps/AppContent';
 import type { ViewerItem } from '../apps/parts';
-import { aboutApp, sectionApps, type AppId } from '../apps/registry';
+import { aboutApp, sectionApps, stackApp, type AppId } from '../apps/registry';
+import { TechStackApp } from '../apps/TechStackApp';
 import { ViewerDialog } from '../apps/ViewerDialog';
 import { sections } from '../content';
 import { readHashApp, replaceHash } from '../lib/hash';
@@ -70,6 +71,15 @@ export function ListView() {
             rootProps={{ id: 'list-about', tabIndex: -1 }}
           >
             <AboutApp onOpenApp={goTo} />
+          </Window>
+
+          <Window
+            title={stackApp.windowTitle}
+            accent={stackApp.accent}
+            className="listview__window"
+            rootProps={{ id: 'list-stack', tabIndex: -1 }}
+          >
+            <TechStackApp />
           </Window>
 
           {sectionApps.map((app, index) => (
