@@ -162,12 +162,3 @@ export type Competition = Pending & {
   myRole?: string;
   evidence: Evidence[];
 };
-
-export type LeadershipRole = Pending & {
-  id: string;
-  organization: string;
-  position: string;
-  academicYear: string;
-  responsibilities: string[];
-  evidence: Evidence[];
-};

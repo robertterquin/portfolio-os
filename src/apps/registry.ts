@@ -8,12 +8,11 @@ export type AppId =
   | 'capstone'
   | 'projects'
   | 'achievements'
-  | 'leadership'
   | 'stack'
   | 'viewer'
   | 'terminal';
 
-/** Anything a link or button can open: an app, or one of the 8 required sections. */
+/** Anything a link or button can open: an app, or one of the required sections. */
 export type Target = AppId | SectionId;
 
 export type AppMeta = {
@@ -69,10 +68,9 @@ const sectionWindows: { id: SectionId & AppId; windowTitle: string; width: numbe
   { id: 'capstone', windowTitle: 'Capstone.app', width: 600 },
   { id: 'projects', windowTitle: '3rd-year projects', width: 600 },
   { id: 'achievements', windowTitle: 'Achievements', width: 520 },
-  { id: 'leadership', windowTitle: 'Leadership', width: 520 },
 ];
 
-/** The desktop folders that hold the 8 required sections. */
+/** The desktop folders that hold the required sections. */
 export const folderApps: AppMeta[] = [
   certificatesApp,
   ...sectionWindows.map(({ id, windowTitle, width }) => {
@@ -89,7 +87,7 @@ export const folderApps: AppMeta[] = [
   }),
 ];
 
-/** Not one of the 8 required sections: an extra folder for technical skills. */
+/** Not one of the required sections: an extra folder for technical skills. */
 export const stackApp: AppMeta = {
   id: 'stack',
   windowTitle: 'Tech Stack',

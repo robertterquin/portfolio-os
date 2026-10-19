@@ -4,18 +4,10 @@ import { certifications } from './certifications';
 import { competitions } from './competitions';
 import { courses } from './courses';
 import { iotProject } from './iot';
-import { leadership } from './leadership';
 import { projects } from './projects';
 
 export type SectionId =
-  | 'certifications'
-  | 'courses'
-  | 'iot'
-  | 'capstone'
-  | 'projects'
-  | 'achievements'
-  | 'competitions'
-  | 'leadership';
+  'certifications' | 'courses' | 'iot' | 'capstone' | 'projects' | 'achievements' | 'competitions';
 
 export type SectionAccent = 'yellow' | 'pink' | 'mint';
 
@@ -35,7 +27,8 @@ export type Section = {
 const pending = (items: { missing?: string[] }[]) =>
   items.filter((item) => (item.missing?.length ?? 0) > 0).length;
 
-// Order follows the midterm requirement, 1 to 8.
+// Order follows the midterm requirement, 1 to 7. Item 8, officership and leadership, is left
+// out on purpose: Robert has held no officer roles, and an empty section would add nothing.
 export const sections: Section[] = [
   {
     id: 'certifications',
@@ -92,13 +85,5 @@ export const sections: Section[] = [
     accent: 'yellow',
     entryCount: competitions.length,
     pendingCount: pending(competitions),
-  },
-  {
-    id: 'leadership',
-    label: 'Leadership',
-    requirement: 'Officership and leadership experiences',
-    accent: 'pink',
-    entryCount: leadership.length,
-    pendingCount: pending(leadership),
   },
 ];

@@ -34,9 +34,8 @@ All portfolio content lives in `src/content/`, one file per section:
 | `projects.ts`       | 5. Third-year course projects        |
 | `achievements.ts`   | 6. Other achievements                |
 | `competitions.ts`   | 7. Competitions and awards           |
-| `leadership.ts`     | 8. Officership and leadership        |
 
-Sections 1, 2, and 7 are all certificates, so they share one **Certificates** window, each in its own part headed with the requirement's wording. Skills for the Tech Stack folder live in `profile.ts` under `skills`.
+Section 8, officership and leadership, is left out because there are no officer roles to show. Sections 1, 2, and 7 are all certificates, so they share one **Certificates** window, each in its own part headed with the requirement's wording. Skills for the Tech Stack folder live in `profile.ts` under `skills`.
 
 Put certificate files in `public/certificates/` and project images in `public/projects/`, then link them from an entry's `evidence` list, for example `{ label: 'Certificate', kind: 'certificate', url: '/certificates/it-specialist-databases.webp', alt: '…' }`. Photos and certificate images need `alt` text describing what they show.
 

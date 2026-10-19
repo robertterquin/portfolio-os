@@ -6,13 +6,12 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 
 | Check                                                                              | Result                                                                                      |
 | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| All 8 required sections present, in the required order                             | ✅ Pass                                                                                     |
+| Required sections 1–7 present, in the required order                               | ✅ Pass (8, officership and leadership, left out: no officer roles)                         |
 | Every certification shows title, issuer, date earned, and certificate file or link | ✅ Pass (3 Certiport certificates, each with image + verify link)                           |
 | Every course shows title, platform, and completion date                            | ✅ Pass (Java Foundations, Oracle Academy)                                                  |
 | IoT project: title, description, objectives, technologies, role, evidence          | ❌ Placeholder only                                                                         |
 | Capstone: title, description, objectives, technologies, team, role, status         | ❌ Placeholder only                                                                         |
 | Every competition shows event, organizer, date, placement, work submitted          | ✅ Pass (3 competitions, each with certificate image)                                       |
-| Every officer role shows organization, position, A.Y., responsibilities            | ❌ No roles yet                                                                             |
 | Every group project names my individual contribution                               | ⚠️ Unknown: the 6 projects need "solo or team", and HackForGov (team Brute4z) needs my role |
 | No placeholder tags remain                                                         | ❌ 9 entries still tagged (list below)                                                      |
 | No confidential data (student IDs, grades, client data, teammates' contacts)       | ✅ Pass                                                                                     |
@@ -27,26 +26,25 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 | 4. Capstone     | Capstone project                                 | Everything: title, description, objectives, tech, team, role, status, screenshots |
 | 5. Projects     | OncoSense, Chainly, Spendly, Hunch, Hapag, Bakas | Course each was built for; solo or team, and my role                              |
 | 7. Competitions | HackForGov 2025                                  | My role on team Brute4z                                                           |
-| 8. Leadership   | (none yet)                                       | Organization, position, A.Y., responsibilities, certificates                      |
 | 2, 6            | Courses, achievements                            | Any more courses, trainings, workshops, scholarships (optional)                   |
 
 ## Technical checks
 
-| Check                                                                                | Result                                                                                               |
-| ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------- |
-| External links (14)                                                                  | ✅ All return 200. LinkedIn returns 999 to scripts (its bot block), same URL as on robertterquin.com |
-| Local images and resume (14 files)                                                   | ✅ All present; all 7 certificate images open in the Certificate Viewer                              |
-| Deep links on a fresh load: `#certifications` … `#leadership`, `#stack`, `#terminal` | ✅ Each opens the right window on top of About Me; 1, 2, 7 open Certificates at their part           |
-| Bad links (`#viewer`, `#nonsense`)                                                   | ✅ Fall back to About Me with a clean address                                                        |
-| `?view=list#capstone`                                                                | ✅ Opens List view at Capstone (fixed during QA: it used to stay at the top)                         |
-| Phone deep link (`#competitions` at 375 px)                                          | ✅ Opens Certificates full screen at Competitions, no sideways scrolling                             |
-| Console errors on the production build                                               | ✅ None                                                                                              |
-| Lighthouse, desktop                                                                  | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
-| Lighthouse, List view                                                                | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
-| Lighthouse, phone                                                                    | Accessibility 100 · Best practices 100 · SEO 100 · Performance 93                                    |
-| Night theme (List view)                                                              | Accessibility 100 (Phase 5 run)                                                                      |
-| Keyboard-only navigation                                                             | ✅ Logical tab order, visible focus, Enter opens, Esc closes (Phase 5)                               |
-| Color contrast, Day and Night                                                        | ✅ All text pairs pass WCAG AA (Phase 5)                                                             |
+| Check                                                                                  | Result                                                                                               |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| External links (14)                                                                    | ✅ All return 200. LinkedIn returns 999 to scripts (its bot block), same URL as on robertterquin.com |
+| Local images and resume (14 files)                                                     | ✅ All present; all 7 certificate images open in the Certificate Viewer                              |
+| Deep links on a fresh load: `#certifications` … `#competitions`, `#stack`, `#terminal` | ✅ Each opens the right window on top of About Me; 1, 2, 7 open Certificates at their part           |
+| Bad links (`#viewer`, `#nonsense`)                                                     | ✅ Fall back to About Me with a clean address                                                        |
+| `?view=list#capstone`                                                                  | ✅ Opens List view at Capstone (fixed during QA: it used to stay at the top)                         |
+| Phone deep link (`#competitions` at 375 px)                                            | ✅ Opens Certificates full screen at Competitions, no sideways scrolling                             |
+| Console errors on the production build                                                 | ✅ None                                                                                              |
+| Lighthouse, desktop                                                                    | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
+| Lighthouse, List view                                                                  | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
+| Lighthouse, phone                                                                      | Accessibility 100 · Best practices 100 · SEO 100 · Performance 93                                    |
+| Night theme (List view)                                                                | Accessibility 100 (Phase 5 run)                                                                      |
+| Keyboard-only navigation                                                               | ✅ Logical tab order, visible focus, Enter opens, Esc closes (Phase 5)                               |
+| Color contrast, Day and Night                                                          | ✅ All text pairs pass WCAG AA (Phase 5)                                                             |
 
 ## Not covered here
 
@@ -65,3 +63,4 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 - Certifications, course completions, and competitions are now one **Certificates** window with three parts, instead of three folders that each showed some of the certificates. The parts keep the requirement's wording so items 1, 2, and 7 are easy to find.
 - Removed repeated text: the "Information Technology Specialist certification" line on every Certiport entry, "Awarded to" in the Certificate Viewer, duplicate About buttons, the section index in List view's About (the sidebar already lists them), extra "coming soon" tags on IoT and Capstone, and a filler note in Achievements.
 - Fixed links to a section landing short when web fonts loaded after the jump.
+- Removed section 8, officership and leadership: Robert has held no officer roles, so the empty Leadership folder was taken out instead of left as a placeholder.

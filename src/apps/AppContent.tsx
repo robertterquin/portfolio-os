@@ -4,7 +4,6 @@ import { CapstoneApp } from './CapstoneApp';
 import { CertificateViewer } from './CertificateViewer';
 import { CertificatesApp } from './CertificatesApp';
 import { IoTApp } from './IoTApp';
-import { LeadershipApp } from './LeadershipApp';
 import type { ViewCertificate, ViewerItem } from './parts';
 import { ProjectsApp } from './ProjectsApp';
 import type { AppId, Target } from './registry';
@@ -35,8 +34,6 @@ export function AppContent({ id, onOpenApp, onViewCertificate, viewerItem }: App
       return <ProjectsApp />;
     case 'achievements':
       return <AchievementsApp onViewCertificate={onViewCertificate} />;
-    case 'leadership':
-      return <LeadershipApp />;
     case 'stack':
       return <TechStackApp />;
     case 'terminal':

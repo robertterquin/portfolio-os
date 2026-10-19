@@ -61,9 +61,9 @@ The site's 6 "Selected Work" projects, copied as written: OncoSense, Chainly, Sp
 
 Teammates' names are left out until each one agrees.
 
-## 8. Officership and leadership ❌
+## 8. Officership and leadership: left out
 
-Not on the site. Need: organization, position, academic year, responsibilities, certificates.
+Robert has held no officer roles, so this section isn't on the site.
 
 ## Removed in this update
 
