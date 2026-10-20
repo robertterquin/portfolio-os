@@ -9,7 +9,7 @@ applySavedWallpaper();
 
 // /?preview shows the component preview page. It only exists in development builds.
 const ComponentPreview = import.meta.env.DEV
-  ? lazy(() => import('./views/ComponentPreview.tsx'))
+  ? lazy(() => import('./dev/ComponentPreview/ComponentPreview.tsx'))
   : null;
 const showPreview = ComponentPreview && new URLSearchParams(location.search).has('preview');
 

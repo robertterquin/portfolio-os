@@ -4,9 +4,9 @@ import { useMediaQuery } from './lib/useMediaQuery';
 import { useTheme } from './lib/theme';
 import { REBOOT_EVENT } from './lib/wallpaper';
 import { BootScreen, MenuBar } from './os';
-import { DesktopView } from './views/DesktopView';
-import { ListView } from './views/ListView';
-import { PhoneHome } from './views/PhoneHome';
+import { DesktopView } from './views/desktop/DesktopView';
+import { ListView } from './views/list/ListView';
+import { PhoneView } from './views/phone/PhoneView';
 import './App.css';
 
 const LIST_VIEW_KEY = 'student-os:list-view';
@@ -103,7 +103,7 @@ export default function App() {
           // Every view opens About Me from the #about link.
           onOpenAbout={() => (location.hash = 'about')}
         />
-        {listView ? <ListView /> : isPhone ? <PhoneHome /> : <DesktopView />}
+        {listView ? <ListView /> : isPhone ? <PhoneView /> : <DesktopView />}
       </div>
       {booting && <BootScreen lines={lines} onDone={finishBoot} />}
     </>

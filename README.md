@@ -49,6 +49,25 @@ Every entry can carry a `missing` list naming details that still have to be conf
 - **Links to a section**: add the section id, e.g. `#capstone`, `#stack`, `#terminal`. `#certifications`, `#courses`, and `#competitions` open Certificates at that part.
 - **Terminal**: type `help` for the commands.
 
+## Project structure
+
+Each component lives in its own folder with its stylesheet beside it, e.g. `components/Chips/Chips.tsx` and `Chips.css`.
+
+```
+src/
+  main.tsx, App.tsx    entry point and the shell that picks a view
+  content/             all portfolio text and links (edit these)
+  styles/              design tokens and base page styles
+  lib/                 small helpers: dates, links in the address bar, theme, scrolling
+  components/          shared pieces used across windows (Button, Chips, Gallery, ...)
+  os/                  desktop chrome: Window, MenuBar, Dock, DesktopIcon, BootScreen
+  apps/                one folder per window: about, certificates, iot, capstone,
+                       projects, achievements, tech-stack, terminal, certificate-viewer
+                       registry.ts lists the windows; AppContent.tsx picks one to show
+  views/               the three layouts: desktop, list, phone
+  dev/                 component preview page (development only, open /?preview)
+```
+
 ## Project docs
 
 - `docs/content-inventory.md`: what was gathered, and from where

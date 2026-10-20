@@ -1,14 +1,14 @@
-import { AboutApp } from './AboutApp';
-import { AchievementsApp } from './AchievementsApp';
-import { CapstoneApp } from './CapstoneApp';
-import { CertificateViewer } from './CertificateViewer';
-import { CertificatesApp } from './CertificatesApp';
-import { IoTApp } from './IoTApp';
-import type { ViewCertificate, ViewerItem } from './parts';
-import { ProjectsApp } from './ProjectsApp';
+import { AboutApp } from './about/AboutApp';
+import { AchievementsApp } from './achievements/AchievementsApp';
+import { CapstoneApp } from './capstone/CapstoneApp';
+import { CertificateViewer } from './certificate-viewer/CertificateViewer';
+import type { ViewCertificate, ViewerItem } from './certificate-viewer/viewerItem';
+import { CertificatesApp } from './certificates/CertificatesApp';
+import { IoTApp } from './iot/IoTApp';
+import { ProjectsApp } from './projects/ProjectsApp';
 import type { AppId, Target } from './registry';
-import { TechStackApp } from './TechStackApp';
-import { TerminalApp } from './TerminalApp';
+import { TechStackApp } from './tech-stack/TechStackApp';
+import { TerminalApp } from './terminal/TerminalApp';
 
 type AppContentProps = {
   id: AppId;
