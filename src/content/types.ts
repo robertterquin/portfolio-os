@@ -34,9 +34,7 @@ export type Profile = Pending & {
   /** Portrait shown in About Me and on the phone home screen. */
   photo: { url: string; alt: string };
   intro: string;
-  location: string;
   email: string;
-  phone: string;
   links: {
     github: string;
     linkedin: string;

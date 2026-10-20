@@ -38,9 +38,9 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 | `?view=list#capstone`                                                                  | ✅ Opens List view at Capstone (fixed during QA: it used to stay at the top)                         |
 | Phone deep link (`#competitions` at 375 px)                                            | ✅ Opens Certificates full screen at Competitions, no sideways scrolling                             |
 | Console errors on the production build                                                 | ✅ None                                                                                              |
-| Lighthouse, desktop                                                                    | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
-| Lighthouse, List view                                                                  | Accessibility 100 · Best practices 100 · SEO 100 · Performance 97                                    |
-| Lighthouse, phone                                                                      | Accessibility 100 · Best practices 100 · SEO 100 · Performance 93                                    |
+| Lighthouse, desktop                                                                    | Accessibility 100 · Best practices 100 · SEO 100 · Performance 98 (re-run 2026-10-20)                |
+| Lighthouse, List view                                                                  | Accessibility 100 · Best practices 100 · SEO 100 · Performance 99 (re-run 2026-10-20)                |
+| Lighthouse, phone                                                                      | Accessibility 100 · Best practices 100 · SEO 100 · Performance 99 (re-run 2026-10-20)                |
 | Night theme (List view)                                                                | Accessibility 100 (Phase 5 run)                                                                      |
 | Keyboard-only navigation                                                               | ✅ Logical tab order, visible focus, Enter opens, Esc closes (Phase 5)                               |
 | Color contrast, Day and Night                                                          | ✅ All text pairs pass WCAG AA (Phase 5)                                                             |
@@ -64,3 +64,12 @@ Run on 2026-10-19 against the production build (`npm run build` + `npm run previ
 - Fixed links to a section landing short when web fonts loaded after the jump.
 - Removed section 8, officership and leadership: Robert has held no officer roles, so the empty Leadership folder was taken out instead of left as a placeholder.
 - Added Robert's portrait (from the robertterquin.com hero, cropped to 480 px) to About Me and the phone home screen, and set the year level to 4th year.
+
+## Pre-deploy check (2026-10-20)
+
+- Format, lint (no warnings), type check, and production build all pass; `npm audit` finds 0 vulnerabilities.
+- All 15 local images and files are referenced and present, with none unused. All 13 external links return 200 (LinkedIn returns 999 to scripts, as before).
+- Every window opens from its link on desktop and phone, every certificate opens in the viewer, and no view scrolls sideways. No console messages.
+- Fixed: the phone number was in the public JavaScript bundle even though it was never shown. It's removed, along with an unused location field.
+- Faster first paint: Google Fonts no longer block rendering, and the portrait is 320 px (26 KB) instead of 480 px. Phone performance went from 86 to 99.
+- Cleanup: removed a leftover Leadership style and an unused font weight, gave gallery images a size so nothing shifts as they load, formatted two config files, and added link-preview tags.

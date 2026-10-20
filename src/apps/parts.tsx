@@ -171,7 +171,8 @@ export function Gallery({ photos }: { photos: Evidence[] }) {
     <div className="gallery">
       {photos.map((photo) => (
         <figure key={photo.url}>
-          <img src={photo.url} alt={photo.alt ?? ''} loading="lazy" />
+          {/* Sized to the 4:3 crop the gallery CSS applies, so nothing shifts as images load. */}
+          <img src={photo.url} alt={photo.alt ?? ''} loading="lazy" width={400} height={300} />
           <figcaption>{photo.label}</figcaption>
         </figure>
       ))}

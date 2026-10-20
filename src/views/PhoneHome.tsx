@@ -85,8 +85,8 @@ export function PhoneHome() {
             className="phone__photo"
             src={profile.photo.url}
             alt={profile.photo.alt}
-            width={480}
-            height={480}
+            width={320}
+            height={320}
           />
           <div>
             <p className="phone__hello">Hi, I'm Robert.</p>

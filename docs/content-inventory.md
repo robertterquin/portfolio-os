@@ -10,7 +10,7 @@ Status key: ✅ done · ⚠️ partial · ❌ missing, need from Robert
 - Program: BS Information Technology, St. Dominic College of Asia, 2023–2027
 - Bio (from the site): software engineer specializing in cross-platform mobile and web systems with Flutter, React, Node.js, and cloud backends
 - Location: Philippines
-- Contact and links: terquinlaqui@gmail.com, +63 926 029 4838, GitHub, LinkedIn, resume PDF
+- Contact and links: terquinlaqui@gmail.com, GitHub, LinkedIn, resume PDF (the phone number on the site is left out of this portfolio)
 - Technical skills: the site's 4 Technical Stack groups, shown in About Me
 - ❌ Year level and section to display
 

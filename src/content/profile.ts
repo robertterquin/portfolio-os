@@ -15,9 +15,7 @@ export const profile: Profile = {
   },
   intro:
     'Software engineer specializing in cross-platform mobile and web systems with Flutter, React, Node.js, and cloud backends. Focused on building clean, high-performance applications with thoughtful user experiences.',
-  location: 'Philippines',
   email: 'terquinlaqui@gmail.com',
-  phone: '+63 926 029 4838',
   links: {
     github: 'https://github.com/robertterquin',
     linkedin: 'https://www.linkedin.com/in/robertterquinlaqui/',

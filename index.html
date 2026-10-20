@@ -9,12 +9,30 @@
       content="student.os: the student portfolio of Robert Terquin C. Laqui, BS Information Technology at St. Dominic College of Asia."
     />
     <title>student.os · Robert Terquin Laqui</title>
+    <!-- Link previews (Messenger, Facebook, LinkedIn). Add og:image once the site has its final address. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="student.os · Robert Terquin Laqui" />
+    <meta
+      property="og:description"
+      content="Student portfolio of a 4th-year BS Information Technology student at St. Dominic College of Asia: certificates, projects, IoT, and capstone."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts load without blocking the first paint; the fallbacks in tokens.css show until they arrive. -->
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Sora:wght@400;600;700&family=Courier+Prime&family=Caveat:wght@500;700&display=swap"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Sora:wght@400;600;700&family=Courier+Prime&family=Caveat:wght@500&display=swap"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Silkscreen&family=Sora:wght@400;600;700&family=Courier+Prime&family=Caveat:wght@500&display=swap"
+    /></noscript>
   </head>
   <body>
     <div id="root"></div>
